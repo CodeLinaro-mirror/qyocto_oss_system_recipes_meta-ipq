@@ -9,6 +9,11 @@ do_install_append() {
 	install -m 0755 ${WORKDIR}/95-gpio-buttons.rules ${D}/lib/udev/rules.d/
 }
 
+addtask rm_usb_mount after do_install before do_package
+do_rm_usb_mount() {
+	rm -rf ${D}/lib/systemd/system/usb-mount@.service
+}
+
 FILES_${PN} += " \
 		/lib/udev/rules.d/95-gpio-buttons.rules \
 		"
