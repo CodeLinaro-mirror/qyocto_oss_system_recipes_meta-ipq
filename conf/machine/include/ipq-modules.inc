@@ -16,7 +16,7 @@ KERNEL_MODULE_AUTOLOAD += "xhci-hcd"
 module_autoload_xhci-hcd = "xhci-hcd"
 
 # net/netfilter kernel loadable modules
-KERNEL_MODULE_AUTOLOAD += "ip_tables iptable_filter iptable_mangle iptable_nat iptable_raw xt_nat nf_log_ipv4"
+KERNEL_MODULE_AUTOLOAD += "ip_tables iptable_filter iptable_mangle iptable_raw xt_nat nf_log_ipv4"
 
 KERNEL_MODULE_AUTOLOAD += "nf_conntrack"
 module_autoload_nf_conntrack += "nf_conntrack nf_conntrack_tftp nf_conntrack_amanda nf_conntrack_broadcast \
