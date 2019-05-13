@@ -2,6 +2,7 @@
 FILESEXTRAPATHS_append := "${THISDIR}/files:"
 SRC_URI += "file://95-gpio-buttons.rules \
 	    file://001-remove_shared_mount_229.patch \
+	    file://0018-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch \
 	    "
 PACKAGECONFIG_remove_libc-musl = "utmp"
 do_install_append() {
