@@ -1,0 +1,13 @@
+Index: git/src/core/mount.c
+===================================================================
+--- git.orig/src/core/mount.c
++++ git/src/core/mount.c
+@@ -399,7 +399,7 @@ static int mount_add_quota_links(Mount *
+ static bool should_umount(Mount *m) {
+         MountParameters *p;
+ 
+-        if (PATH_IN_SET(m->where, "/", "/usr") ||
++        if (PATH_IN_SET(m->where, "/", "/usr", "/rom") ||
+             path_startswith(m->where, "/run/initramfs"))
+                 return false;
+ 
