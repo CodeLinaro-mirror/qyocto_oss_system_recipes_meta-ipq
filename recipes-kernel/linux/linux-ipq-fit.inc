@@ -16,7 +16,7 @@ DEPENDS += "u-boot-mkimage-native"
 FIT_IMAGE_NAME_ipq40xx = "qcom-ipq40xx-ap.dkxx.itb"
 FIT_IMAGE_NAME_ipq807x = "qcom-ipq807x-ap.hkxx.itb"
 FIT_IMAGE_NAME_ipq807x_64 = "qcom-ipq807x-ap.hkxx.itb"
-SOC_TYPE = "${@bb.data.getVar('MACHINE', d, 1).split('-')[0]}"
+SOC_TYPE = "${@bb.data.getVar('SOC_FAMILY', d, 1).split(':')[1]}"
 
 mk_fit_images() {
 	name=$1

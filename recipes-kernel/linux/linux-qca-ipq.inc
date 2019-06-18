@@ -42,8 +42,8 @@ def find_cfgs(d):
     return sources_list
 
 copy_kernel_config() {
-	CONFIG_NAME="${@bb.data.getVar('MACHINE', d, 1).split('-')[0]}"
-	cat ${B}/../${CONFIG_NAME}-default >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
+	CONFIG_NAME="${@bb.data.getVar('SOC_FAMILY', d, 1).split(':')[1]}"
+    cat ${B}/../${CONFIG_NAME}-default >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
 }
 
 do_configure_prepend() {
