@@ -6,10 +6,11 @@ IMAGE_TYPEDEP_ubi        = "squashfs squashfs-xz"
 ITB_IMAGE_NAME_ipq40xx   = "fit-qcom-ipq40xx-ap.dkxx.itb"
 ITB_IMAGE_NAME_ipq807x   = "fit-qcom-ipq807x-ap.hkxx.itb"
 ITB_IMAGE_NAME_ipq807x_64   = "fit-qcom-ipq807x-ap.hkxx.itb"
+ITB_IMAGE_NAME_ipq95xx   = "fit-ipq95xx-ap.alxx.itb"
 UBINIZE_CFG              = "${DEPLOY_DIR_IMAGE}/ubinize-${MACHINE}.cfg"
 
 IMAGE_PREPROCESS_COMMAND += "create_ipq_ubi_img;"
-SOC_TYPE="${@bb.data.getVar('SOC_FAMILY', d, 1).split(':')[1]}"
+SOC_TYPE="${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 IMAGE_NAME_SUFFIX ??= ".rootfs"
 
 create_ipq_ubi_img() {
@@ -19,6 +20,7 @@ create_ipq_ubi_img() {
 create_ubinize_config() {
    echo \[kernel\] > "${UBINIZE_CFG}"
    echo mode=ubi >> "${UBINIZE_CFG}"
+   echo "$SOC_TYPE" >> "${UBINIZE_CFG}"
    echo image="${DEPLOY_DIR_IMAGE}/${ITB_IMAGE_NAME_${SOC_TYPE}}" >> "${UBINIZE_CFG}"
    echo vol_id=0 >> "${UBINIZE_CFG}"
    echo vol_type=dynamic >> "${UBINIZE_CFG}"

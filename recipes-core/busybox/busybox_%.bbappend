@@ -1,19 +1,12 @@
-SRC_URI += "\
-	    file://fragment.cfg \
-	    file://001-simple_script.patch;patchdir=../ \
-	    "
 
-SRC_URI_remove_ipq = "\
-		      file://010-networking-fix-uninitialized-memory-when-displaying-.patch \
-		     "
-
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI += "file://fragment.cfg;subdir=busybox-1.24.1 \
+            file://lock.c;subdir=busybox-1.24.1/miscutils \
+            file://telnet.init \
+            "
 
 do_install_append() {
-#copy as udhcpc.script as required by QRDK
-	if grep "CONFIG_UDHCPC=y" ${B}/.config; then
-		install -d ${D}${sysconfdir}
-		install -m 0755 ${WORKDIR}/simple.script ${D}${sysconfdir}/udhcpc.script
-		sed -i "s:/SBIN_DIR/:${base_sbindir}/:" ${D}${sysconfdir}/udhcpc.script
-	fi
+	install -d ${D}/etc/init.d/
+	install -m 0755 ${WORKDIR}/telnet.init ${D}/etc/init.d/telnet
 }
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"

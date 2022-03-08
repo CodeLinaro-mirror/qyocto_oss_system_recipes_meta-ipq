@@ -1,9 +1,9 @@
 
 LICENSE = "GPLv2"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64)"
+COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx)"
 
 KMACHINE = "${MACHINE}"
 
@@ -11,18 +11,19 @@ INSANE_SKIP_kernel-dev = "debug-files"
 
 PARALLEL_MAKE = ""
 KARCH ?= "arm"
-DEPENDS += "u-boot-mkimage-native"
+DEPENDS += "u-boot-mkimage-native rsync-native dtc-native"
 
 FIT_IMAGE_NAME_ipq40xx = "qcom-ipq40xx-ap.dkxx.itb"
 FIT_IMAGE_NAME_ipq807x = "qcom-ipq807x-ap.hkxx.itb"
 FIT_IMAGE_NAME_ipq807x_64 = "qcom-ipq807x-ap.hkxx.itb"
-SOC_TYPE = "${@bb.data.getVar('SOC_FAMILY', d, 1).split(':')[1]}"
+FIT_IMAGE_NAME_ipq95xx = "ipq95xx-ap.alxx.itb"
+SOC_TYPE = "${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 
 mk_fit_images() {
 	name=$1
 	addr=$2
 
-	oe_runmake ${DTB_PATH}/${name}.dtb
+#	oe_runmake ${DTB_PATH}/${name}.dtb
 	echo "pwd = `pwd`"
 	cd ../fit
 	oe_runmake "ARCH=${KARCH}" \
@@ -104,7 +105,7 @@ generate_its() {
 	for d in ${KERNEL_DEVICETREE}; do
 		if [ ! -e "$d" ]; then
 			dts=$(find_device_tree "${d%.dtb}")
-			board_name=$(basename $dts .dtb | sed -e 's/^\([^\(.*?-?\)]*-\)//g')
+			board_name=$(basename $dts .dtb | sed -e 's/^\([^-]*-\)\{1\}//g')
 			generate_FDT "${dts%.dtb}" $board_name
 		fi
 	done
@@ -119,7 +120,7 @@ EOF
 	for d in ${KERNEL_DEVICETREE}; do
 		if [ ! -e "$d" ]; then
 			dts=$(find_device_tree "${d%.dtb}")
-			board_name=$(basename $dts .dtb | sed -e 's/^\([^\(.*?-?\)]*-\)//g')
+			board_name=$(basename $dts .dtb | sed -e 's/^\([^-]*-\)\{1\}//g')
 			generate_CONFIG $board_name
 		fi
 	done

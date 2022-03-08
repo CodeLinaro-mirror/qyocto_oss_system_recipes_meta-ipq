@@ -2,7 +2,7 @@ DESCRIPTION = "Linux kernel for IPQ platforms"
 SECTION = "kernel"
 LICENSE = "GPLv2"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
@@ -14,8 +14,9 @@ SRC_URI += "file://fit"
 
 INITRAMFS_IMAGE = ""
 INITRAMFS_IMAGE_BUNDLE = "1"
-KERNEL_INITRAMFS ?= '${@base_conditional("INITRAMFS_IMAGE_BUNDLE", "1", "1", "", d)}'
+KERNEL_INITRAMFS ?= '${@oe.utils.conditional("INITRAMFS_IMAGE_BUNDLE", "1", "1", "", d)}'
 
+KCONFIG_MODE = "--alldefconfig"
 KERNEL_MODULE_AUTOLOAD += "${MACHINE_FEATURES}"
 
 # Set a variable in .configure
@@ -42,7 +43,7 @@ def find_cfgs(d):
     return sources_list
 
 copy_kernel_config() {
-	CONFIG_NAME="${@bb.data.getVar('SOC_FAMILY', d, 1).split(':')[1]}"
+	CONFIG_NAME="${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
     cat ${B}/../${CONFIG_NAME}-default >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
 }
 
@@ -100,17 +101,17 @@ do_configure_prepend() {
         ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${B} ${B}/.config ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
     fi
 
-	yes '' | oe_runmake -C ${S} O=${B} oldconfig
-        oe_runmake -C ${S} O=${B} savedefconfig && cp ${B}/defconfig ${WORKDIR}/defconfig.saved
+#	yes '' | oe_runmake -C ${S} O=${B} oldconfig
+#        oe_runmake -C ${S} O=${B} savedefconfig && cp ${B}/defconfig ${WORKDIR}/defconfig.saved
 }
 
 do_install_append() {
-        oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
-        install -d ${D}/boot
-        make dtbs || true
-        install -m 0644 ${S}/arch/${KARCH}/boot/dts/${DTB_PATH}/*.dtb ${D}/boot || true
+#        oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
+#        install -d ${D}/boot
+#        make dtbs || true
+#        install -m 0644 ${S}/arch/${KARCH}/boot/dts/${DTB_PATH}/*.dtb ${D}/boot || true
 }
 
-PACKAGES =+ "kernel-headers ${PN}"
-FILES_kernel-headers = "${exec_prefix}/src/linux*"
-FILES_${PN} += "/boot/*"
+#PACKAGES =+ "kernel-headers ${PN}"
+#FILES_kernel-headers = "${exec_prefix}/src/linux*"
+#FILES_${PN} += "/boot/*"
