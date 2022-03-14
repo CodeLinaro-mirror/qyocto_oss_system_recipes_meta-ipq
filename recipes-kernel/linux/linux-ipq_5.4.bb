@@ -10,6 +10,7 @@ FILESPATH =+ "${TOPDIR}/../:"
 SRC_URI = "file://kernel \
 	   file://defconfig \
 	   file://ipq95xx-default \
+	   file://ipq95xx_64-default \
 	   "
 S = "${WORKDIR}/kernel"
 SRC_URI += "file://fit"
@@ -25,5 +26,5 @@ EXTRA_OEMAKE += " \
 #	"
 
 #  MAKEOPTS += __KERNEL__=1
-COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx)"
+COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64)"
 KERNEL_IMAGETYPE ?= "Image"

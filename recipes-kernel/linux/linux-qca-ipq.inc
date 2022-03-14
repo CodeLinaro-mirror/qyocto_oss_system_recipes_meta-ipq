@@ -103,7 +103,12 @@ do_configure_prepend() {
 
 #	yes '' | oe_runmake -C ${S} O=${B} oldconfig
 #        oe_runmake -C ${S} O=${B} savedefconfig && cp ${B}/defconfig ${WORKDIR}/defconfig.saved
+	mkdir -p ${B}/arch/${KARCH}/boot/dts/
+	cp -rf ${S}/arch/${KARCH}/boot/dts/qcom/* ${B}/arch/${KARCH}/boot/dts/
 }
+
+
+
 
 do_install_append() {
 #        oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH

@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx)"
+COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64)"
 
 KMACHINE = "${MACHINE}"
 
@@ -17,13 +17,14 @@ FIT_IMAGE_NAME_ipq40xx = "qcom-ipq40xx-ap.dkxx.itb"
 FIT_IMAGE_NAME_ipq807x = "qcom-ipq807x-ap.hkxx.itb"
 FIT_IMAGE_NAME_ipq807x_64 = "qcom-ipq807x-ap.hkxx.itb"
 FIT_IMAGE_NAME_ipq95xx = "ipq95xx-ap.alxx.itb"
+FIT_IMAGE_NAME_ipq95xx_64 = "ipq95xx-ap.alxx.itb"
 SOC_TYPE = "${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 
 mk_fit_images() {
 	name=$1
 	addr=$2
 
-#	oe_runmake ${DTB_PATH}/${name}.dtb
+	oe_runmake ${DTB_PATH}/${name}.dtb
 	echo "pwd = `pwd`"
 	cd ../fit
 	oe_runmake "ARCH=${KARCH}" \
@@ -88,7 +89,7 @@ mk_multi_fit_image() {
 }
 
 find_device_tree() {
-       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/${DTB_PATH} -name $1*.dtb) 2>/dev/null)"
+       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/ -name $1*.dtb) 2>/dev/null)"
 }
 
 generate_its() {
