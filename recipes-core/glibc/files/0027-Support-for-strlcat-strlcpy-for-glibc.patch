@@ -18,42 +18,34 @@ diff --git a/string/Makefile b/string/Makefile
 index 9c87419..af65875 100644
 --- a/string/Makefile
 +++ b/string/Makefile
-@@ -41,7 +41,7 @@ routines	:= strcat strchr strcmp strcoll strcpy strcspn		\
- 				     addsep replace)			\
- 		   envz basename					\
- 		   strcoll_l strxfrm_l string-inlines memrchr		\
--		   xpg-strerror strerror_l
-+		   xpg-strerror strerror_l strlcat strlcpy
- 
- strop-tests	:= memchr memcmp memcpy memmove mempcpy memset memccpy	\
- 		   stpcpy stpncpy strcat strchr strcmp strcpy strcspn	\
-diff --git a/string/Versions b/string/Versions
-index 59bf35a..7139edf 100644
+@@ -32,7 +32,7 @@ headers		:= string.h bits/string_fortifi
+ routines	:= strcat strchr strcmp strcoll strcpy strcspn		\
+ 		   strverscmp strdup strndup				\
+ 		   strerror _strerror strlen strnlen			\
+-		   strncat strncmp strncpy				\
++		   strncat strncmp strncpy strlcat strlcpy				\
+ 		   strrchr strpbrk strsignal strspn strstr strtok	\
+ 		   strtok_r strxfrm memchr memcmp memmove memset	\
+ 		   mempcpy bcopy bzero ffs ffsll stpcpy stpncpy		\
 --- a/string/Versions
 +++ b/string/Versions
-@@ -36,9 +36,9 @@ libc {
+@@ -36,7 +36,7 @@ libc {
  
      # s*
      stpcpy; stpncpy; strcasecmp; strcat; strchr; strcmp; strcoll; strcpy;
 -    strcspn; strdup; strerror; strerror_r; strfry; strlen; strncasecmp;
--    strncat; strncmp; strncpy; strndup; strnlen; strpbrk; strrchr; strsep;
--    strsignal; strspn; strstr; strtok; strtok_r; strxfrm; swab;
-+    strcspn; strdup; strerror; strerror_r; strfry; strlen; strlcat; strlcpy;
-+    strncasecmp; strncat; strncmp; strncpy; strndup; strnlen; strpbrk; strrchr; 
-+    strsep; strsignal; strspn; strstr; strtok; strtok_r; strxfrm; swab;
++    strcspn; strdup; strerror; strerror_r; strfry; strlen; strlcat; strlcpy;strncasecmp;
+     strncat; strncmp; strncpy; strndup; strnlen; strpbrk; strrchr; strsep;
+     strsignal; strspn; strstr; strtok; strtok_r; strxfrm; swab;
    }
-   GLIBC_2.1 {
-     # functions used in macros and other libraries
 diff --git a/string/string.h b/string/string.h
 index 1f3e348..f6b2057 100644
 --- a/string/string.h
 +++ b/string/string.h
-@@ -552,7 +552,26 @@ extern int strncasecmp_l (const char *__s1, const char *__s2,
- extern char *strsep (char **__restrict __stringp,
- 		     const char *__restrict __delim)
-      __THROW __nonnull ((1, 2));
-+
- #endif
+@@ -148,6 +148,24 @@ extern size_t strxfrm (char *__restrict
+ 		       const char *__restrict __src, size_t __n)
+      __THROW __nonnull ((2));
+ 
 +/*
 + * Appends __src to string __dst of size __n (unlike strncat, __n is the
 + * full size of __dst, not space left).  At most __n-1 characters
@@ -72,17 +64,9 @@ index 1f3e348..f6b2057 100644
 +extern size_t strlcpy (char *__dst, __const char *__src, size_t __n)
 +     __THROW __nonnull ((1, 2));
 +
- 
- #ifdef	__USE_XOPEN2K8
- /* Return a string describing the meaning of the signal number in SIG.  */
-@@ -574,6 +593,7 @@ extern char *stpncpy (char *__restrict __dest,
-      __THROW __nonnull ((1, 2));
- #endif
- 
-+
- #ifdef	__USE_GNU
- /* Compare S1 and S2 as strings holding name & indices/version numbers.  */
- extern int strverscmp (const char *__s1, const char *__s2)
+ #ifdef __USE_XOPEN2K8
+ /* POSIX.1-2008 extended locale interface (see locale.h).  */
+ # include <bits/types/locale_t.h>
 diff --git a/string/strlcat.c b/string/strlcat.c
 new file mode 100644
 index 0000000..ba44a59
@@ -207,7 +191,7 @@ index 0000000..8577e27
 +
 +	return(s - src - 1);	/* count does not include NUL */
 +}
--- 
+---
 The Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
 a Linux Foundation Collaborative Project
 
