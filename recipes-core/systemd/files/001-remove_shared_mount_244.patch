@@ -1,0 +1,22 @@
+From 7471c7c16facdd30d6f73289d18f91142fdcd34e Mon Sep 17 00:00:00 2001
+From: Ram Chandra Jangir <quic_rjangir@quicinc.com>
+Date: Thu, 2 Nov 2017 09:58:16 +0530
+Subject: [PATCH] systemd: mount rootfs as private instead of shared
+
+Change-Id: Id64cbd4a2d17f0b18ec2b4b2ded225391f0747c6
+Signed-off-by: Ram Chandra Jangir <quic_rjangir@quicinc.com>
+---
+ src/core/mount-setup.c  |  2 +-
+ 1 file changed, 1 insertions(+), 1 deletions(-)
+
+--- a/src/core/mount-setup.c
++++ b/src/core/mount-setup.c
+@@ -396,7 +396,7 @@
+          * specific setups need other settings they can reset the
+          * propagation mode to private if needed. */
+         if (detect_container() <= 0)
+-                if (mount(NULL, "/", NULL, MS_REC|MS_SHARED, NULL) < 0)
++                if (mount(NULL, "/", NULL, MS_REC|MS_PRIVATE, NULL) < 0)
+                         log_warning_errno(errno, "Failed to set up the root directory for shared mount propagation: %m");
+ 
+         /* Create a few directories we always want around, Note that
