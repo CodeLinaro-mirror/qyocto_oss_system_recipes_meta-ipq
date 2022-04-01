@@ -104,7 +104,7 @@ do_configure_prepend() {
 #	yes '' | oe_runmake -C ${S} O=${B} oldconfig
 #        oe_runmake -C ${S} O=${B} savedefconfig && cp ${B}/defconfig ${WORKDIR}/defconfig.saved
 	mkdir -p ${B}/arch/${KARCH}/boot/dts/
-	cp -rf ${S}/arch/${KARCH}/boot/dts/qcom/* ${B}/arch/${KARCH}/boot/dts/
+	cp -rf ${S}/arch/${KARCH}/boot/dts/${DTB_PATH}/* ${B}/arch/${KARCH}/boot/dts/
 }
 
 
