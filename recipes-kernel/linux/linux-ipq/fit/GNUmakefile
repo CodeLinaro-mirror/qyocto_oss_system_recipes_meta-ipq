@@ -60,10 +60,10 @@ endif
 
 all: clean linux.fit fdt.fit
 
-linux.fit: Image.gz linux.its
+linux.fit: Image.gz Image.lzma linux.its
 	mkimage -f linux.its $@
 
-multi.fit: Image.gz
+multi.fit: Image.gz Image.lzma
 	mkimage -f multi.its $@
 	rm -f multi.its
 
@@ -83,5 +83,10 @@ Image.gz: $(KERNEL_IMAGE)
 	gzip -f -c -9 $< >$@
 	cp $(DTB) linux.dtb
 
+Image.lzma: $(KERNEL_IMAGE)
+	lzma -zvfk -4 $<
+	cp $<.lzma .
+	cp $(DTB) linux.dtb
+
 clean:
-	@rm -f Image.gz *.its *.img *.fit
+	@rm -f Image.gz Image.lzma *.its *.img *.fit

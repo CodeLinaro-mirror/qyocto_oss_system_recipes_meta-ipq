@@ -7,11 +7,11 @@
 	images {
 		kernel@1 {
 			description = "ARM Yocto Linux-LINUX_VERSION";
-			data = /incbin/("./Image.gz");
+			data = /incbin/("./Image.lzma");
 			type = "kernel";
 			arch = "ARCH";
 			os = "linux";
-			compression = "gzip";
+			compression = "lzma";
 			load = <LOAD>;
 			entry = <ENTRY>;
 			hash@1 {
