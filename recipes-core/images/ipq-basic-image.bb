@@ -10,6 +10,7 @@ IMAGE_INSTALL += " \
 	${NETWORK_PKGS} \
 	${UTILS} \
 	${SSDK_NOHNAT_PKGS} \
+	${WIFI_PKGS} \
 	"
 
 EXTRA_IMAGEDEPENDS += " \
