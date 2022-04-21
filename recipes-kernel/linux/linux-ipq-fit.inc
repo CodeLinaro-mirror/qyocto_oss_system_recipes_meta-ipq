@@ -23,8 +23,8 @@ SOC_TYPE = "${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 mk_fit_images() {
 	name=$1
 	addr=$2
-
-	oe_runmake ${DTB_PATH}/${name}.dtb
+ 
+	# oe_runmake ${DTB_PATH}/${name}.dtb
 	echo "pwd = `pwd`"
 	cd ../fit
 	oe_runmake "ARCH=${KARCH}" \
@@ -89,7 +89,7 @@ mk_multi_fit_image() {
 }
 
 find_device_tree() {
-       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/ -name $1*.dtb) 2>/dev/null)"
+       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/${DTB_PATH} -name $1*.dtb) 2>/dev/null)"
 }
 
 generate_its() {
