@@ -9,6 +9,7 @@ IMAGE_INSTALL += " \
 	${IPQ_BASE_PKGS} \
 	${NETWORK_PKGS} \
 	${UTILS} \
+	${SSDK_NOHNAT_PKGS} \
 	"
 
 EXTRA_IMAGEDEPENDS += " \
