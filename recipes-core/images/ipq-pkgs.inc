@@ -15,9 +15,8 @@ NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server mcprox
 
 NSS_PKGS = " \
 	    qca-nss-dp \
-	    qca-nss-drv \
-	    qca-nss-fw \
-	    qca-nss-clients \
+	    qca-nss-ecm \
+	    qca-nss-sfe \
 	    "
 
 QCA_NSS_FW = "qca-nss-fw"
