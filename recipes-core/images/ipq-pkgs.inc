@@ -8,7 +8,7 @@ IMAGE_FEATURES += "package-management"
 QYOCTO_PKGS = "uci libnl dropbear bridge-utils lua"
 
 # IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils mtd initoverlay procps watchdog button-hotplug mcproxy"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools  mtd initoverlay procps watchdog mcproxy"
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools  mtd initoverlay wififw-mount procps watchdog mcproxy"
 
 # NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server wireless-tools mcproxy qca-mcs-lkm qca-mcs-app"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server mcproxy "
@@ -42,4 +42,5 @@ MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 # TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf"
 TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba  perf"
 
-UTILS = "perf pm-utils file rng-tools ppp ppp-oe"
+UTILS = "perf pm-utils file rng-tools"
+# UTILS = "perf pm-utils file rng-tools ppp ppp-oe"
