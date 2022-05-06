@@ -1,7 +1,7 @@
 
 
 KERNEL_MODULE_AUTOLOAD += "dwc3"
-module_autoload_dwc3 = "usbcore usb-common dwc3 phy-qca-baldur phy-qca-uniphy dwc3-ipq40xx"
+module_autoload_dwc3 = "usbcore usb-common dwc3 phy-qca-baldur phy-qca-uniphy dwc3-ipq40xx dwc3-qcom phy-qcom-qusb2 "
 
 KERNEL_MODULE_AUTOLOAD += "usb-storage"
 module_autoload_usb-storage = "usb-storage sd_mod scsi_mod"
@@ -15,8 +15,15 @@ module_autoload_ehci-hcd = "ehci-hcd ehci-platform"
 KERNEL_MODULE_AUTOLOAD += "xhci-hcd"
 module_autoload_xhci-hcd = "xhci-hcd"
 
+KERNEL_MODULE_AUTOLOAD += "xhci-pci"
+module_autoload_xhci-pci = "xhci-pci"
+
+KERNEL_MODULE_AUTOLOAD += "xhci-plat-hcd"
+module_autoload_xhci-plat-hcd = "xhci-plat-hcd"
+
 # net/netfilter kernel loadable modules
 KERNEL_MODULE_AUTOLOAD += "ip_tables iptable_filter iptable_mangle iptable_raw xt_nat nf_log_ipv4"
+KERNEL_MODULE_AUTOLOAD += "bootconfig libcomposite uas usb_f_diag g_diag  diagchar"
 
 KERNEL_MODULE_AUTOLOAD += "nf_conntrack"
 module_autoload_nf_conntrack += "nf_conntrack nf_conntrack_tftp nf_conntrack_amanda nf_conntrack_broadcast \
