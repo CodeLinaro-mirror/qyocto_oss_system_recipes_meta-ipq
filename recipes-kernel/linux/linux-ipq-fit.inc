@@ -89,7 +89,7 @@ mk_multi_fit_image() {
 }
 
 find_device_tree() {
-       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/${DTB_PATH} -name $1*.dtb) 2>/dev/null)"
+       echo "$(basename $(find ${B}/arch/${KARCH}/boot/dts/${DTB_PATH} -name $1.dtb) 2>/dev/null)"
 }
 
 generate_its() {
