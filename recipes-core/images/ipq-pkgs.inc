@@ -11,7 +11,7 @@ QYOCTO_PKGS = "uci libnl dropbear bridge-utils lua"
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools mtd initoverlay wififw-mount qca-qmi-framework qca-qmi-framework-qrtr qca-time-services qca-diag ipq-boot procps watchdog mcproxy"
 
 # NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server wireless-tools mcproxy qca-mcs-lkm qca-mcs-app"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server mcproxy "
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server mcproxy nat46"
 
 NSS_PKGS += " \
 	    qca-nss-dp \
@@ -38,7 +38,7 @@ QCA_ECM = "qca-nss-ecm"
 
 WIFI_PKGS = "qca-hostapd qca-wpasupplicant qca-wififw qca-cfg80211 qca-wifi qca-wifi-tools qca-qcmbr iw"
 
-MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
+MCS_PKGS = "qca-mcs-lkm"
 
 # TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf"
 TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba  perf"
