@@ -47,5 +47,6 @@ create_ubinize_config() {
 IMAGE_CMD_ubi() {
 
    ubinize ${UBINIZE_ARGS} -o ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi ${UBINIZE_CFG}
+   cp ${STAGING_SBINDIR_NATIVE}/ubinize ${IMGDEPLOYDIR}/
 
 }
