@@ -13,11 +13,12 @@ IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools mtd initoverlay wififw-mou
 # NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server wireless-tools mcproxy qca-mcs-lkm qca-mcs-app"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server mcproxy "
 
-NSS_PKGS = " \
+NSS_PKGS += " \
 	    qca-nss-dp \
 	    qca-nss-ecm \
-	    qca-nss-sfe \
 	    "
+
+IPQ95XX_NSS_PKGS += "qca-nss-ppe qca-nss-sfe"
 
 QCA_NSS_FW = "qca-nss-fw"
 
