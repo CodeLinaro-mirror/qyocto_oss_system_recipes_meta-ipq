@@ -38,7 +38,7 @@ QCA_ECM = "qca-nss-ecm"
 
 WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts"
 
-MCS_PKGS = "qca-mcs-lkm"
+MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
 TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils "
 
