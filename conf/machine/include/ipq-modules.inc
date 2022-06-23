@@ -24,6 +24,9 @@ module_autoload_xhci-plat-hcd = "xhci-plat-hcd"
 KERNEL_MODULE_AUTOLOAD += "leds-gpio"
 module_autoload_leds-gpio = "leds-gpio"
 
+KERNEL_MODULE_AUTOLOAD += "cfg80211"
+module_autoload_cfg80211 = "cfg80211"
+
 # net/netfilter kernel loadable modules
 KERNEL_MODULE_AUTOLOAD += "ip_tables iptable_filter iptable_mangle iptable_raw xt_nat nf_log_ipv4"
 KERNEL_MODULE_AUTOLOAD += "bootconfig libcomposite uas usb_f_diag g_diag  diagchar"
