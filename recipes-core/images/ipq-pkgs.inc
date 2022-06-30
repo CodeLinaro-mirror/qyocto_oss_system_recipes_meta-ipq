@@ -8,10 +8,10 @@ IMAGE_FEATURES += "package-management"
 QYOCTO_PKGS = "uci libnl dropbear bridge-utils lua"
 
 # IPQ_BASE_PKGS = "button-hotplug"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-qmi-framework-qrtr qca-diag ipq-boot procps watchdog mcproxy qca-time-services "
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-qmi-framework-qrtr qca-diag ipq-boot procps watchdog mcproxy qca-time-services "
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils dhcp-server wireless-tools mcproxy nat46 "
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils iputils-tracepath iputils-traceroute6 iproute2  iw dhcp-server wireless-tools mcproxy nat46 "
 
 NSS_PKGS += " \
 	    qca-nss-dp \
@@ -40,7 +40,7 @@ WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wi
 
 MCS_PKGS = "qca-mcs-lkm"
 
-TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug "
+TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils "
 
 # UTILS = "ppp ppp-oe"
 UTILS = "perf pm-utils file rng-tools"
