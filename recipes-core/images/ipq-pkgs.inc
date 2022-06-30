@@ -42,5 +42,4 @@ MCS_PKGS = "qca-mcs-lkm"
 
 TEST_PKGS = "iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils "
 
-# UTILS = "ppp ppp-oe"
-UTILS = "perf pm-utils file rng-tools"
+UTILS = "perf pm-utils file rng-tools ppp ppp-oe rp-pppoe"
