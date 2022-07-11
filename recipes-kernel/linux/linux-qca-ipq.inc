@@ -119,4 +119,4 @@ do_install_append() {
 
 #PACKAGES =+ "kernel-headers ${PN}"
 #FILES_kernel-headers = "${exec_prefix}/src/linux*"
-#FILES_${PN} += "/boot/*"
+FILES_${PN} += "/boot/*"
