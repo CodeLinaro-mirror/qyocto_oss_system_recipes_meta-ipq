@@ -48,6 +48,6 @@ IMAGE_CMD_ubi() {
 
    ubinize ${UBINIZE_ARGS} -o ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi ${UBINIZE_CFG}
    cp ${STAGING_SBINDIR_NATIVE}/ubinize ${IMGDEPLOYDIR}/
-   mkdir -p ${IMGDEPLOYDIR}/debug
-   cp -af $(find $(find ${BASE_WORKDIR}/${MACHINE_ARCH}-rdk-${HOST_OS}/ -name image) -name *.ko) ${IMGDEPLOYDIR}/debug/
+   mkdir -p ${IMGDEPLOYDIR}/debug/modules
+   cp -af $(find $(find ${BASE_WORKDIR}/${MACHINE_ARCH}-rdk-${HOST_OS}/ -name image) -name *.ko) ${IMGDEPLOYDIR}/debug/modules
 }
