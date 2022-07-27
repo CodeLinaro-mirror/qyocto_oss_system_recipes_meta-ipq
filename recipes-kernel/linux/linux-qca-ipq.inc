@@ -45,6 +45,9 @@ def find_cfgs(d):
 copy_kernel_config() {
 	CONFIG_NAME="${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
     cat ${B}/../${CONFIG_NAME}-default >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
+	if [ "${DEBUG_KASAN_PROFILE}" = "true" ]; then
+		cat ${B}/../ipq_debug_kasan >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
+	fi
 }
 
 do_configure_prepend() {
