@@ -11,6 +11,7 @@ SRC_URI = "file://kernel \
 	   file://defconfig \
 	   file://ipq95xx-default \
 	   file://ipq95xx_64-default \
+	   file://ipq_debug_kasan \
 	   "
 S = "${WORKDIR}/kernel"
 SRC_URI += "file://fit"
