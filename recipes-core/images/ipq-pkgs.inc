@@ -5,7 +5,7 @@ include recipes-core/images/ipq-images.inc
 
 IMAGE_FEATURES += "package-management"
 
-QYOCTO_PKGS = "uci libnl dropbear bridge-utils lua"
+QYOCTO_PKGS = " libnl dropbear bridge-utils lua5.1 "
 
 # IPQ_BASE_PKGS = "button-hotplug"
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-diag ipq-boot procps watchdog mcproxy qca-time-services "
