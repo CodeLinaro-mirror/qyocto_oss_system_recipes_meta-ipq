@@ -117,12 +117,12 @@ do_configure_prepend() {
 
 
 do_install_append() {
-        # oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
+        oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
         install -d ${D}/boot
         make dtbs || true
         install -m 0644 ${S}/arch/${KARCH}/boot/dts/${DTB_PATH}/*.dtb ${D}/boot || true
 }
 
-#PACKAGES =+ "kernel-headers ${PN}"
-#FILES_kernel-headers = "${exec_prefix}/src/linux*"
+PACKAGES =+ "kernel-headers ${PN}"
+FILES_kernel-headers = "${exec_prefix}/src/linux*"
 FILES_${PN} += "/boot/*"
