@@ -42,6 +42,6 @@ MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
 FWA_PKGS = "ipqcm-server ipqcm-client qmuxd dsutils qca-diag qmi-services qmi qmi-core qmi-client-helper qmi-client-qmux rmnetctl configdb xmllib  qnicorn netmgr udev-scripts libevdev udev qdi datarmnet"
 
-TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test "
+TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench "
 
 UTILS = "perf pm-utils file rng-tools ppp ppp-oe rp-pppoe"
