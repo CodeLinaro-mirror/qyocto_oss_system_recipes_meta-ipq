@@ -3,6 +3,8 @@
 #
 # Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
 #
+# Copyright (c) 2022, Qualcomm Innovation Center, Inc. All rights reserved.
+#
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
 # copyright notice and this permission notice appear in all copies.
@@ -72,6 +74,21 @@ ipq40xx_power_auto() {
         # Change the CPU load threshold above which frequency is up-scaled to
         # turbo frequency,to 50%
         echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+}
+
+ipq9574_power_auto() {
+	# change scaling governor as ondemand to enable clock scaling based on system load
+	echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+	# Change sampling rate for frequency scaling decisions to 1s, from 10 ms
+	echo "1000000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+	# Change sampling rate for frequency down scaling decision to 10s
+	echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+
+	# Change the CPU load threshold above which frequency is up-scaled to
+	# turbo frequency,to 50%
+	echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
 }
 
 ipq8064_ac_power()
@@ -560,6 +577,188 @@ ipq8074_battery_power()
 
 }
 
+
+ipq9574_phy_power_on()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | db-al01-c1 | db-al01-c2 | db-al01-c3 |\
+			db-al02-c1 | db-al02-c2)
+			ssdk_sh port poweron set 2
+			ssdk_sh port poweron set 3
+			ssdk_sh port poweron set 4
+			ssdk_sh port poweron set 5
+			ssdk_sh port poweron set 6
+		;;
+		db-al02-c3)
+			ssdk_sh port poweron set 2
+			ssdk_sh port poweron set 3
+			ssdk_sh port poweron set 4
+			ssdk_sh port poweron set 6
+		;;
+	esac
+}
+
+ipq9574_phy_power_off()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | db-al01-c1 | db-al01-c2 | db-al01-c3 |\
+			db-al02-c1 | db-al02-c2)
+			ssdk_sh port poweroff set 2
+			ssdk_sh port poweroff set 3
+			ssdk_sh port poweroff set 4
+			ssdk_sh port poweroff set 5
+			ssdk_sh port poweroff set 6
+		;;
+		db-al02-c3)
+			ssdk_sh port poweroff set 2
+			ssdk_sh port poweroff set 3
+			ssdk_sh port poweroff set 4
+			ssdk_sh port poweroff set 6
+		;;
+	esac
+}
+
+ipq9574_ac_power()
+{
+	echo "Entering AC-Power Mode"
+# Cortex Power-UP Sequence
+	ipq9574_power_auto
+
+# Enabling Auto scale on NSS cores
+	echo 1 > /proc/sys/dev/nss/clock/auto_scale
+
+# Power on PHYs of LAN ports
+	ipq9574_phy_power_on
+# PCIe Power-UP Sequence
+	sleep 2
+	echo 1 > /sys/bus/pci/rcrescan
+	sleep 1
+
+# USB Power-UP Sequence
+	if [ -e /lib/modules/$(uname -r)/dwc3-qcom.ko ]
+	then
+		modprobe phy-qcom-qusb2.ko
+		modprobe dwc3-qcom.ko
+		modprobe dwc3.ko
+		modprobe usb_f_qdss.ko
+	fi
+
+	if [ -d config/usb_gadget/g1 ]
+	then
+		echo "8a00000.dwc3" > /config/usb_gadget/g1/UDC
+	fi
+
+# LAN interface up
+	sysevent set lan-start
+
+# Wifi Power-up Sequence
+	if [ -f /lib/modules/$(uname -r)/ath11k.ko ]; then
+		modprobe ath11k
+		modprobe ath11k_ahb
+		modprobe ath11k_pci
+		sleep 2
+		/etc/utopia/service.d/service_wlan.sh wlan-start
+	else
+		/etc/utopia/service.d/service_wlan.sh wlan-start
+	fi
+
+# SD/MMC Power-UP sequence
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		for sd_drvname in $(cat /tmp/sysinfo/sd_drvname)
+		do
+			echo $sd_drvname > /sys/bus/platform/drivers/sdhci_msm/bind
+		done
+	fi
+
+	sleep 1
+
+	exit 0
+}
+
+ipq9574_battery_power()
+{
+	echo "Entering Battery Mode..."
+
+# Wifi Power-down Sequence
+	lsmod | grep ath11k > /dev/null
+	if [ $? -eq 0 ]; then
+		/etc/utopia/service.d/service_wlan.sh wlan-stop
+		sleep 2
+		rmmod ath11k_pci
+		rmmod ath11k_ahb
+		rmmod ath11k
+	else
+		/etc/utopia/service.d/service_wlan.sh wlan-stop
+	fi
+
+# PCIe Power-Down Sequence
+
+	[ -f /sys/bus/pci/rcremove ] && {
+		echo 1 > /sys/bus/pci/rcremove
+	}
+	sleep 1
+
+# Find scsi devices and remove it
+	partition=`cat /proc/partitions | awk -F " " '{print $4}'`
+
+	for entry in $partition; do
+		sd_entry=$(echo $entry | cut -c 2)
+
+		if [ "$sd_entry" = "sd" ]; then
+			[ -f /sys/block/$entry/device/delete ] && {
+				echo 1 > /sys/block/$entry/device/delete
+			}
+		fi
+	done
+
+
+# Power off PHYs of LAN ports
+        ipq9574_phy_power_off
+# USB Power-down Sequence
+	if [ -d config/usb_gadget/g1 ]
+	then
+		echo "" > /config/usb_gadget/g1/UDC
+	fi
+
+	if [ -d /sys/module/dwc3_qcom ]
+	then
+		rmmod usb_f_qdss
+		rmmod dwc3
+		rmmod dwc3_qcom
+		rmmod phy_qcom_qusb2
+	fi
+	sleep 2
+
+#SD/MMC Power-down Sequence
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		rm /tmp/sysinfo/sd_drvname
+		if [ -d /sys/block/mmcblk0 ]; then
+			sd_drvname=`readlink /sys/block/mmcblk0 | grep -o "[0-9]*.sdhci[^/]*"`
+			echo "$sd_drvname" >> /tmp/sysinfo/sd_drvname
+			echo $sd_drvname >> /sys/bus/platform/drivers/sdhci_msm/unbind
+		fi
+	fi
+
+# LAN interface down
+	sysevent set lan-stop
+
+# Disabling Auto scale on NSS cores
+	echo 0 > /proc/sys/dev/nss/clock/auto_scale
+
+# Scaling Down UBI Cores
+	echo 1500000000 > /proc/sys/dev/nss/clock/current_freq;
+
+# Cortex Power-down Sequence
+	echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+}
+
 board=$(ipq_board_name)
 case "$1" in
 	false)
@@ -572,6 +771,8 @@ case "$1" in
 			ipq4019_ap_dk04_1_ac_power ;;
 		hk01)
 			ipq8074_ac_power ;;
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
+			ipq9574_ac_power ;;
 		esac ;;
 	true)
 		case "$board" in
@@ -583,5 +784,7 @@ case "$1" in
 			ipq4019_ap_dk04_1_battery_power ;;
 		hk01)
 			ipq8074_battery_power ;;
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
+			ipq9574_battery_power ;;
 		esac ;;
 esac
