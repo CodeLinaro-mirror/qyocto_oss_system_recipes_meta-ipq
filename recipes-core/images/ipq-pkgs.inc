@@ -44,4 +44,6 @@ FWA_PKGS = "ipqcm-server ipqcm-client qmuxd dsutils qca-diag qmi-services qmi qm
 
 TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench "
 
+QYOCTO_TEST_PKGS = " iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp "
+
 UTILS = "perf pm-utils file rng-tools ppp ppp-oe rp-pppoe"

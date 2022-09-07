@@ -26,8 +26,6 @@ IMAGE_INSTALL += " \
 		"
 
 EXTRA_IMAGEDEPENDS += " \
-		${TEST_PKGS} \
+		${QYOCTO_TEST_PKGS} \
 		"
-TEST_PKGS_remove = " ${FWA_PKGS} ebtables iperf3 lvm2 "
-IPQ_BASE_PKGS_remove = " ipq-boot "
 UTILS_remove = " rp-pppoe "
