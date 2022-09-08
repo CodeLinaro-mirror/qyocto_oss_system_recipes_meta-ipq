@@ -661,7 +661,7 @@ ipq9574_ac_power()
 		sleep 2
 		/etc/utopia/service.d/service_wlan.sh wlan-start
 	else
-		/etc/utopia/service.d/service_wlan.sh wlan-start
+		systemctl start qca-wifi.service
 	fi
 
 # SD/MMC Power-UP sequence
@@ -692,7 +692,7 @@ ipq9574_battery_power()
 		rmmod ath11k_ahb
 		rmmod ath11k
 	else
-		/etc/utopia/service.d/service_wlan.sh wlan-stop
+		systemctl stop qca-wifi.service
 	fi
 
 # PCIe Power-Down Sequence
