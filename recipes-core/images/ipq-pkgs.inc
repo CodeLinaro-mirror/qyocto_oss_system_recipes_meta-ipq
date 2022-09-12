@@ -46,4 +46,4 @@ TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba
 
 QYOCTO_TEST_PKGS = " iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp "
 
-UTILS = "perf pm-utils file rng-tools ppp ppp-oe rp-pppoe"
+UTILS = "perf pm-utils file rng-tools ppp ppp-oe rp-pppoe pdt"
