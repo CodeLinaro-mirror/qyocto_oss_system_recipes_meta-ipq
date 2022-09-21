@@ -8,7 +8,7 @@ IMAGE_FEATURES += "package-management"
 QYOCTO_PKGS = " libnl dropbear bridge-utils lua5.1 "
 
 # IPQ_BASE_PKGS = "button-hotplug"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-diag ipq-boot procps watchdog mcproxy qca-time-services "
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-diag ipq-boot procps watchdog mcproxy qca-time-services qcawifi-scripts"
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils iputils-tracepath iputils-traceroute6 iproute2  iw dhcp-server wireless-tools mcproxy nat46 "
@@ -36,7 +36,7 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag"
+WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon"
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
