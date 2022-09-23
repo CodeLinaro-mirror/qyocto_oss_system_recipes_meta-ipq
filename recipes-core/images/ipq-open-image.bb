@@ -28,4 +28,6 @@ IMAGE_INSTALL += " \
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
-UTILS_remove = " rp-pppoe "
+UTILS_remove = " rp-pppoe pdt "
+
+IPQ_BASE_PKGS_remove = " ipq-boot "
