@@ -582,8 +582,8 @@ ipq9574_phy_power_on()
 {
 	local board=$(ipq_board_name)
 	case "$board" in
-		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | db-al01-c1 | db-al01-c2 | db-al01-c3 |\
-			db-al02-c1 | db-al02-c2)
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10 |\
+			db-al01-c1 | db-al01-c2 | db-al01-c3 | db-al02-c1 | db-al02-c2)
 			ssdk_sh port poweron set 2
 			ssdk_sh port poweron set 3
 			ssdk_sh port poweron set 4
@@ -603,8 +603,8 @@ ipq9574_phy_power_off()
 {
 	local board=$(ipq_board_name)
 	case "$board" in
-		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | db-al01-c1 | db-al01-c2 | db-al01-c3 |\
-			db-al02-c1 | db-al02-c2)
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10 |\
+			db-al01-c1 | db-al01-c2 | db-al01-c3 | db-al02-c1 | db-al02-c2)
 			ssdk_sh port poweroff set 2
 			ssdk_sh port poweroff set 3
 			ssdk_sh port poweroff set 4
@@ -637,12 +637,12 @@ ipq9574_ac_power()
 	sleep 1
 
 # USB Power-UP Sequence
-	if [ -e /lib/modules/$(uname -r)/dwc3-qcom.ko ]
+	if [ -e /lib/modules/$(uname -r)/kernel/drivers/usb/dwc3/dwc3-qcom.ko ]
 	then
-		modprobe phy-qcom-qusb2.ko
-		modprobe dwc3-qcom.ko
-		modprobe dwc3.ko
-		modprobe usb_f_qdss.ko
+		modprobe phy-qcom-qusb
+		modprobe dwc3-qcom
+		modprobe dwc
+		modprobe usb_f_qdss
 	fi
 
 	if [ -d config/usb_gadget/g1 ]
