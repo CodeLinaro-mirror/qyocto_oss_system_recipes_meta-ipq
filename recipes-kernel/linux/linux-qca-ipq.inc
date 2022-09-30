@@ -54,6 +54,8 @@ copy_kernel_config() {
 }
 
 do_configure_prepend() {
+	sed -i 's/EXTRA_CFLAGS/ccflags-y/g' ${S}/lib/lzma/Makefile
+	sed -i 's+-I+-I$(srctree)/+g' ${S}/lib/lzma/Makefile
 	# cleanup existing .config
 	echo "" > ${B}/.config
 	CONF_SED_SCRIPT=""

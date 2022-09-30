@@ -19,7 +19,7 @@ SRC_URI += "file://fit"
 
 # MAKEOPTS += KBUILD_VERBOSE=1
 # MAKEOPTS += KERNEL_SRC_PATH="$(STAGING_KERNEL_DIR)"
-EXTRA_CFLAGS += "-I${B}/../kernel -I${B}/../kernel/drivers/base/regmap -I${B}/kernel/drivers/base/regmap -I${B}/../kernel/include/linux -I${B}/../kernel/include/linux/lzma -include types.h -Wno-error"
+EXTRA_CFLAGS += " -I${B}/../kernel"
 EXTRA_OEMAKE += " \
         EXTRA_CFLAGS='${EXTRA_CFLAGS}' \
         "
