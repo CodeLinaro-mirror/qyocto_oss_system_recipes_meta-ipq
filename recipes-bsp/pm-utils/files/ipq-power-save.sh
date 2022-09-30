@@ -639,9 +639,9 @@ ipq9574_ac_power()
 # USB Power-UP Sequence
 	if [ -e /lib/modules/$(uname -r)/kernel/drivers/usb/dwc3/dwc3-qcom.ko ]
 	then
-		modprobe phy-qcom-qusb
+		modprobe phy-qcom-qusb2
 		modprobe dwc3-qcom
-		modprobe dwc
+		modprobe dwc3
 		modprobe usb_f_qdss
 	fi
 
@@ -662,6 +662,9 @@ ipq9574_ac_power()
 		/etc/utopia/service.d/service_wlan.sh wlan-start
 	else
 		systemctl start qca-wifi.service
+		sleep 10
+		systemctl stop ccspwifiagent
+		systemctl start ccspwifiagent
 	fi
 
 # SD/MMC Power-UP sequence
