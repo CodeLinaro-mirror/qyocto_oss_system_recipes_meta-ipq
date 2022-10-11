@@ -38,7 +38,7 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon"
+WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon athtestcmd"
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
