@@ -47,7 +47,6 @@ create_ubinize_config() {
 IMAGE_CMD_ubi() {
 
    ubinize ${UBINIZE_ARGS} -o ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi ${UBINIZE_CFG}
-   cp ${STAGING_SBINDIR_NATIVE}/ubinize ${IMGDEPLOYDIR}/
    mkdir -p ${IMGDEPLOYDIR}/debug/modules
    cp -afn $(find $(find ${BASE_WORKDIR}/${MACHINE_ARCH}${HOST_VENDOR}-${HOST_OS}/ -name image) -name *.ko) ${IMGDEPLOYDIR}/debug/modules
 }
