@@ -53,8 +53,14 @@ do_compile() {
 	touch ${B}/u-boot-initial-env
 }
 
+do_install() {
+	install -d ${D}${bindir}
+        install -m 0755 ${B}/tools/dumpimage ${D}${bindir}/dumpimage
+}
 
 do_deploy_append() {
 	cp u-boot-${MACHINE}-${PV}-${PR}.${UBOOT_ELF_SUFFIX} u-boot-${MACHINE}-${PV}-${PR}-stripped.${UBOOT_ELF_SUFFIX}
 	${STRIP} u-boot-${MACHINE}-${PV}-${PR}-stripped.${UBOOT_ELF_SUFFIX}
 }
+FILES_${PN}-env = " ${bindir}/dumpimage "
+INSANE_SKIP_${PN}-env += "ldflags"
