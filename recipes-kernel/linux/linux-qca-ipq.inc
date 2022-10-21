@@ -51,6 +51,12 @@ copy_kernel_config() {
 	if [ "${DEBUG_KASAN_PROFILE}" = "true" ]; then
 		cat ${B}/../ipq_debug_kasan >> ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE}/${KERNEL_DEFCONFIG} available."
 	fi
+
+        if [ -d "${WORKDIR}/../../ipq-open-image" ] ; then
+                sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${WORKDIR}/defconfig
+                sed -i 's/CONFIG_CNSS2_GENL=y/# CONFIG_CNSS2_GENL is not set/g' ${WORKDIR}/defconfig
+                sed -i 's/CONFIG_CNSS2_QCA9574_SUPPORT=y/# CONFIG_CNSS2_QCA9574_SUPPORT is not set/g' ${WORKDIR}/defconfig
+        fi
 }
 
 do_configure_prepend() {
