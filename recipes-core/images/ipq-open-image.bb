@@ -33,6 +33,9 @@ UTILS_remove = " rp-pppoe pdt "
 IPQ_BASE_PKGS_remove = " ipq-boot "
 IPQ_BASE_PKGS_append = " ipq-board "
 
+NETWORK_PKGS_remove = " iw "
+NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf "
+LC_ALL = "C"
 do_getprofiletype () {
 	sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/defconfig
         sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/${MACHINE_ARCH}-default
