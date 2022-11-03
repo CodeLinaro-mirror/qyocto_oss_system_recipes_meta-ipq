@@ -6,8 +6,8 @@ include recipes-core/images/ipq-images.inc
 IMAGE_FEATURES += "package-management"
 
 QYOCTO_PKGS = " libnl dropbear bridge-utils lua5.1 "
-SYSUPGRADE_ipq95xx_64 = "sysupgrade-helper"
-SYSUPGRADE_ipq95xx = "u-boot-2016-env"
+SYSUPGRADE_ipq95xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE_ipq95xx = "u-boot-2016-env sysupgrade "
 
 # IPQ_BASE_PKGS = "button-hotplug"
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-diag ipq-boot procps watchdog mcproxy qca-time-services qcawifi-scripts ${SYSUPGRADE} "
