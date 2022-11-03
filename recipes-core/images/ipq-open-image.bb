@@ -30,7 +30,7 @@ EXTRA_IMAGEDEPENDS += " \
 		"
 UTILS_remove = " rp-pppoe pdt "
 
-IPQ_BASE_PKGS_remove = " ipq-boot "
+IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} "
 IPQ_BASE_PKGS_append = " ipq-board "
 
 NETWORK_PKGS_remove = " iw "
