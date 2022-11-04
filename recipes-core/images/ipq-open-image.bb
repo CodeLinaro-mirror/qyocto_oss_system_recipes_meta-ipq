@@ -36,10 +36,3 @@ IPQ_BASE_PKGS_append = " ipq-board "
 NETWORK_PKGS_remove = " iw "
 NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf "
 LC_ALL = "C"
-do_getprofiletype () {
-	sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/defconfig
-        sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/${MACHINE_ARCH}-default
-        sed -i 's/CONFIG_CNSS2_GENL=y/# CONFIG_CNSS2_GENL is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/${MACHINE_ARCH}-default
-        sed -i 's/CONFIG_CNSS2_QCA9574_SUPPORT=y/# CONFIG_CNSS2_QCA9574_SUPPORT is not set/g' ${THISDIR}/../../recipes-kernel/linux/linux-ipq/${MACHINE_ARCH}-default
-}
-addtask getprofiletype before do_prepare_recipe_sysroot
