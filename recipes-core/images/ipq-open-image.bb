@@ -36,3 +36,8 @@ IPQ_BASE_PKGS_append = " ipq-board "
 NETWORK_PKGS_remove = " iw "
 NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf "
 LC_ALL = "C"
+
+do_getprofiletype () {
+        echo "The task is required to avoid race condition"
+}
+addtask getprofiletype before do_prepare_recipe_sysroot
