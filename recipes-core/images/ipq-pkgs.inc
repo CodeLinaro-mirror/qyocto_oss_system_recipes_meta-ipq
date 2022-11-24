@@ -20,7 +20,11 @@ NSS_PKGS += " \
 	    qca-nss-ecm \
 	    "
 
-IPQ95XX_NSS_PKGS += "qca-nss-ppe qca-nss-sfe"
+QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp"
+
+QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
+
+IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe"
 
 QCA_NSS_FW = "qca-nss-fw"
 
