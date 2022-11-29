@@ -56,7 +56,8 @@ copy_kernel_config() {
                 sed -i 's/CONFIG_CNSS2=y/# CONFIG_CNSS2 is not set/g' ${WORKDIR}/defconfig
                 sed -i 's/CONFIG_CNSS2_GENL=y/# CONFIG_CNSS2_GENL is not set/g' ${WORKDIR}/defconfig
                 sed -i 's/CONFIG_CNSS2_QCA9574_SUPPORT=y/# CONFIG_CNSS2_QCA9574_SUPPORT is not set/g' ${WORKDIR}/defconfig
-        fi
+		sed -i 's/CONFIG_CFG80211=m/# CONFIG_CFG80211 is not set/g' ${WORKDIR}/defconfig
+	fi
 }
 
 do_configure_prepend() {
