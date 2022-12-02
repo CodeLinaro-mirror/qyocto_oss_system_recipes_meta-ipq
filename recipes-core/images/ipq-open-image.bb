@@ -34,7 +34,7 @@ IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} "
 IPQ_BASE_PKGS_append = " ipq-board "
 
 NETWORK_PKGS_remove = " iw "
-NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf "
+NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf ath-autoload "
 LC_ALL = "C"
 
 do_getprofiletype () {
