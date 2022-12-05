@@ -1,2 +1,2 @@
-SUBSYSTEM=="button",ENV{ACTION}=="released", RUN+="/bin/sh /lib/wifi/wps-hotplug.sh"
-SUBSYSTEM=="button",ENV{ACTION}=="released", RUN+="/bin/sh /lib/wifi/wps-reset-hotplug.sh"
+SUBSYSTEM=="button",ENV{ACTION}=="remove", RUN+="/bin/sh /lib/wifi/wps-hotplug.sh"
+SUBSYSTEM=="button",ENV{ACTION}=="remove", RUN+="/bin/sh /lib/wifi/wps-reset-hotplug.sh"
