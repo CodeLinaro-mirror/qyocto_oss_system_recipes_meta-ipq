@@ -46,7 +46,7 @@ WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wi
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
-FWA_PKGS = "qca-diag rmnetctl datarmnet libqrtr-glib libqmi-glib modemmanager"
+FWA_PKGS = "qca-diag rmnetctl datarmnet libqrtr-glib libqmi-glib modemmanager qdl"
 
 TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strongswan "
 
