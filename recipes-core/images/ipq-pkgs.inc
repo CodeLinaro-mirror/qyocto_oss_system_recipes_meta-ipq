@@ -13,7 +13,7 @@ SYSUPGRADE_ipq95xx = "u-boot-2016-env sysupgrade "
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald qca-qmi-framework qca-diag ipq-boot procps watchdog mcproxy qca-time-services qcawifi-scripts ${SYSUPGRADE} "
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iputils iputils-tracepath iputils-traceroute6 iproute2  iw dhcp-server wireless-tools mcproxy nat46 "
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iw dhcp-server wireless-tools mcproxy nat46 "
 
 NSS_PKGS += " \
 	    qca-nss-dp \
