@@ -651,7 +651,7 @@ ipq9574_ac_power()
 	fi
 
 # LAN interface up
-	sysevent set lan-start
+	/etc/utopia/service.d/service_lan.sh lan-start
 
 # Wifi Power-up Sequence
 	if [ -f /lib/modules/$(uname -r)/ath11k.ko ]; then
@@ -749,7 +749,7 @@ ipq9574_battery_power()
 	fi
 
 # LAN interface down
-	sysevent set lan-stop
+	/etc/utopia/service.d/service_lan.sh lan-stop
 
 # Disabling Auto scale on NSS cores
 	echo 0 > /proc/sys/dev/nss/clock/auto_scale
