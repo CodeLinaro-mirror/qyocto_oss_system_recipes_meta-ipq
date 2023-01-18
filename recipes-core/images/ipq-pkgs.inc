@@ -24,7 +24,7 @@ QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp"
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
-IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe"
+IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe strongswan qca-nss-eip qca-nss-fw-eip-al"
 
 QCA_NSS_FW = "qca-nss-fw"
 
@@ -48,7 +48,7 @@ MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
 FWA_PKGS = "qca-diag rmnetctl datarmnet libqrtr-glib libqmi-glib modemmanager qdl kickstart"
 
-TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strongswan "
+TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade"
 
 QYOCTO_TEST_PKGS = " iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
 
