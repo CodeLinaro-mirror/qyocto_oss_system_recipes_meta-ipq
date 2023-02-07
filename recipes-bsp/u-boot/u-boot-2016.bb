@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 
 LOCALVERSION ?= "+yocto"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(ipq40xx|ipq807x|ipq95xx)"
+COMPATIBLE_MACHINE = "(ipq40xx|ipq807x|ipq95xx|ipq53xx)"
 # DEPENDS +="u-boot-mkimage-native"
 
 SRC_URI = "file://u-boot-2016 \
@@ -21,6 +21,7 @@ B = "${WORKDIR}/build"
 UBOOT_MACHINE_ipq40xx = "ipq40xx_defconfig"
 UBOOT_MACHINE_ipq807x = "ipq807x_defconfig"
 UBOOT_MACHINE_ipq95xx = "ipq9574_defconfig"
+UBOOT_MACHINE_ipq53xx = "ipq5332_defconfig"
 UBOOT_MAKE_TARGET = "all"
 
 EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}" STRIP=true V=1'
