@@ -8,6 +8,8 @@ ITB_IMAGE_NAME_ipq807x   = "fit-qcom-ipq807x-ap.hkxx.itb"
 ITB_IMAGE_NAME_ipq807x_64   = "fit-qcom-ipq807x-ap.hkxx.itb"
 ITB_IMAGE_NAME_ipq95xx   = "fit-ipq95xx-ap.alxx.itb"
 ITB_IMAGE_NAME_ipq95xx_64   = "fit-ipq95xx-ap.alxx.itb"
+ITB_IMAGE_NAME_ipq53xx   = "fit-ipq53xx-ap.mixx.itb"
+ITB_IMAGE_NAME_ipq53xx_64   = "fit-ipq53xx-ap.mixx.itb"
 
 UBINIZE_CFG              = "${DEPLOY_DIR_IMAGE}/ubinize-${MACHINE}.cfg"
 
