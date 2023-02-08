@@ -10,9 +10,12 @@ IMAGE_INSTALL += " \
 	${NETWORK_PKGS} \
 	${UTILS} \
 	${SSDK_NOHNAT_PKGS} \
-	${WIFI_PKGS} \
 	"
 
 EXTRA_IMAGEDEPENDS += " \
-		${TEST_PKGS} \
+		${QYOCTO_TEST_PKGS} \
 		"
+
+IPQ_BASE_PKGS_remove = " ipq-boot "
+
+UTILS_remove = " rp-pppoe pdt "
