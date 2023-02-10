@@ -20,7 +20,7 @@ NSS_PKGS += " \
 	    qca-nss-ecm \
 	    "
 
-QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp"
+QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds"
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
