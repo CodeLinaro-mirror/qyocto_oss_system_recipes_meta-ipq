@@ -11,6 +11,8 @@ SRC_URI = "file://kernel \
 	   file://defconfig \
 	   file://ipq95xx-default \
 	   file://ipq95xx_64-default \
+	   file://ipq53xx-default \
+	   file://ipq53xx_64-default \
 	   file://ipq_debug \
 	   file://ipq_debug_kasan \
 	   "
@@ -28,5 +30,5 @@ EXTRA_OEMAKE += " \
 #	"
 
 #  MAKEOPTS += __KERNEL__=1
-COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64)"
+COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64|ipq53xx|ipq53xx_64)"
 KERNEL_IMAGETYPE ?= "Image"
