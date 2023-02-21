@@ -32,6 +32,7 @@ UTILS_remove = " rp-pppoe pdt "
 
 IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} "
 IPQ_BASE_PKGS_append = " ipq-board "
+IPQ95XX_NSS_PKGS_remove = " strongswan "
 
 NETWORK_PKGS_remove = " iw "
 NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf ath-driver-init "
