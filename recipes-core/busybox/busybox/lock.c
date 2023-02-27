@@ -3,6 +3,20 @@
  *
  * This is free software, licensed under the GNU General Public License v2.
  */
+
+//config:config LOCK
+//config:      bool "lock"
+//config:      default n
+//config:      help
+//config:        Small utility for using locks in scripts
+
+//applet:IF_LOCK(APPLET(lock, BB_DIR_BIN, BB_SUID_DROP))
+
+//kbuild:lib-$(CONFIG_LOCK) += lock.o
+
+//usage:#define lock_trivial_usage NOUSAGE_STR
+//usage:#define lock_full_usage ""
+
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/stat.h>
