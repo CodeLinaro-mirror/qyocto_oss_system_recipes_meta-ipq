@@ -30,7 +30,7 @@ EXTRA_IMAGEDEPENDS += " \
 		"
 UTILS_remove = " rp-pppoe pdt "
 
-IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} "
+IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} datarmnet modemmanager "
 IPQ_BASE_PKGS_append = " ipq-board "
 IPQ95XX_NSS_PKGS_remove = " strongswan "
 
