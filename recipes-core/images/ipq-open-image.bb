@@ -42,7 +42,7 @@ IPQ95XX_NSS_PKGS_remove = " strongswan "
 IPQ53XX_NSS_PKGS_remove = " strongswan "
 
 NETWORK_PKGS_remove = " iw "
-NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf ath-driver-init "
+NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf ath-driver-init dhcp-client "
 LC_ALL = "C"
 
 do_getprofiletype () {
