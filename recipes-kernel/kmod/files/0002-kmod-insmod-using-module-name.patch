@@ -1,0 +1,86 @@
+From e6a8b136ee6fe48c70521b12f52bab5f59148588 Mon Sep 17 00:00:00 2001
+From: Sandhya KS <quic_sandhyks@quicinc.com>
+Date: Wed, 5 Apr 2023 15:34:00 +0530
+Subject: [PATCH] kmod: Insmod using module name alone
+
+The insmod utility in kmod currently inserts the
+kernel module only using the path and extension given
+as input, otherwise it fails to load the kernel module.
+
+The change in this patch helps to insert the module
+in the kernel using just the kernel name. The default
+directory for locating the kernel modules is taken as
+/lib/modules/`uname -r`.
+
+The original behaviour where the modules can be inserted
+using the absolute path and extension will still work
+with this change.
+
+Signed-off-by: Sandhya KS <quic_sandhyks@quicinc.com>
+---
+ tools/insmod.c | 35 ++++++++++++++++++++++++++++++-----
+ 1 file changed, 30 insertions(+), 5 deletions(-)
+
+diff --git a/tools/insmod.c b/tools/insmod.c
+index c422971..4bd7d54 100644
+--- a/tools/insmod.c
++++ b/tools/insmod.c
+@@ -73,6 +73,11 @@ static int do_insmod(int argc, char *argv[])
+ 	const char *null_config = NULL;
+ 	unsigned int flags = 0;
+ 
++	struct kmod_list *l, *list = NULL;
++
++	void (*show)(struct kmod_module *m, bool install,
++			const char *options) = NULL;
++
+ 	for (;;) {
+ 		int c, idx = 0;
+ 		c = getopt_long(argc, argv, cmdopts_s, cmdopts, &idx);
+@@ -141,9 +146,31 @@ static int do_insmod(int argc, char *argv[])
+ 
+ 	err = kmod_module_new_from_path(ctx, filename, &mod);
+ 	if (err < 0) {
+-		ERR("could not load module %s: %s\n", filename,
+-		    strerror(-err));
+-		goto end;
++		err = kmod_module_new_from_lookup(ctx, filename, &list);
++		if (list == NULL || err < 0) {
++			ERR("Module %s not found in directory %s\n", filename,
++					ctx ? kmod_get_dirname(ctx) : "(missing)");
++			return -ENOENT;
++		}
++		kmod_list_foreach(l, list) {
++			flags |= KMOD_PROBE_FAIL_ON_LOADED;
++			struct kmod_module *mod = kmod_module_get_module(l);
++			err = kmod_module_probe_insert_module(mod, flags, 
++					NULL, NULL, NULL, show);
++			if (err >= 0)
++				/* ignore flag return values such as a mod being blacklisted */
++				err = 0;
++			else {
++				ERR("could not insert '%s': %s\n", kmod_module_get_name(mod),
++						strerror(-err));
++				break;
++			}
++			kmod_module_unref(mod);
++		}
++		kmod_module_unref_list(list);
++		kmod_unref(ctx);
++		free(opts);
++		return err;
+ 	}
+ 
+ 	err = kmod_module_insert_module(mod, flags, opts);
+@@ -152,8 +179,6 @@ static int do_insmod(int argc, char *argv[])
+ 		    mod_strerror(-err));
+ 	}
+ 	kmod_module_unref(mod);
+-
+-end:
+ 	kmod_unref(ctx);
+ 	free(opts);
+ 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+-- 
+2.17.1
+
