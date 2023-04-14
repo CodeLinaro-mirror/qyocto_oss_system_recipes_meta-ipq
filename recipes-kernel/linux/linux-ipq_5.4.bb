@@ -14,6 +14,7 @@ SRC_URI = "file://kernel \
 	   file://ipq53xx-default \
 	   file://ipq53xx_64-default \
 	   file://ipq807x_64-default \
+	   file://ipq807x-default \
 	   file://ipq_debug \
 	   file://ipq_debug_kasan \
 	   "
