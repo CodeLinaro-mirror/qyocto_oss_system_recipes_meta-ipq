@@ -29,6 +29,7 @@ QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss
 
 IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe strongswan qca-nss-eip qca-nss-fw-eip-al"
 IPQ53XX_NSS_PKGS += "qca-nss-ppe qca-nss-sfe"
+IPQ807X_NSS_PKGS += "qca-nss-fw qca-nss-drv strongswan qca-nss-clients qca-nss-fw-eip-hk"
 
 QCA_NSS_FW = "qca-nss-fw"
 

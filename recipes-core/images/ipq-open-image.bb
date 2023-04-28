@@ -31,6 +31,15 @@ NSS_ipq53xx = "${SSDK_NOHNAT_PKGS} \
 		${IPQ53XX_NSS_PKGS} \
 		"
 
+NSS_ipq807x_64 = "${SSDK_NOHNAT_PKGS} \
+		${NSS_PKGS} \
+		${IPQ807X_NSS_PKGS} \
+		"
+NSS_ipq807x = "${SSDK_NOHNAT_PKGS} \
+		${NSS_PKGS} \
+		${IPQ807X_NSS_PKGS} \
+		"
+
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
