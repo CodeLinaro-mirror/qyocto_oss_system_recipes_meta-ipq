@@ -42,6 +42,36 @@ dpkg --list > ${logdir}/pkgs_found_before.log 2>&1
 
 apt-get -y install make gcc g++ diffstat texinfo chrpath bc gcc-multilib git gawk build-essential autoconf libtool libncurses-dev gettext gperf lib32z1 libc6-i386 g++-multilib python-git
 
+#coccienlle 1.1.1 needs to be installed from source code
+if [[ $(lsb_release -rs) != "22.04" ]]; then
+	apt-get -y remove --purge libparmap-ocaml
+	echo ""
+	echo "Installing and setting up coccienlle 1.1.1 from source code"
+	dpkg -r coccinelle
+	cd /tmp
+	rm -rf coccinelle
+	git clone https://github.com/coccinelle/coccinelle.git
+	cd /tmp/coccinelle
+	git checkout 1.1.1
+	./autogen
+	./configure
+	make
+	make install
+	#After installation of coccinelle, remove the downloaded code
+	cd /tmp
+	rm -rf coccinelle
+else
+	apt-get -y install coccinelle
+fi
+
+if [[ $(lsb_release -rs) == "20.04" || $(lsb_release -rs) == "22.04" ]]; then
+wget http://archive.ubuntu.com/ubuntu/pool/main/m/make-dfsg/make_4.1-9.1ubuntu1_amd64.deb
+sudo dpkg -i make_4.1-9.1ubuntu1_amd64.deb
+#After installation of make, remove the downloaded code
+rm make_4.1-9.1ubuntu1_amd64.deb
+fi
+
+
 dpkg --list > ${logdir}/pkgs_found_after.log 2>&1
 
 gzip -9 ${logdir}/*
