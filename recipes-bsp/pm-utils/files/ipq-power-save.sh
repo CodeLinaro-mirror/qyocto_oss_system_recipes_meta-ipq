@@ -771,7 +771,7 @@ case "$1" in
 			ipq4019_ap_dk04_1_ac_power ;;
 		hk01)
 			ipq8074_ac_power ;;
-		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c4 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
 			ipq9574_ac_power ;;
 		esac ;;
 	true)
@@ -784,7 +784,7 @@ case "$1" in
 			ipq4019_ap_dk04_1_battery_power ;;
 		hk01)
 			ipq8074_battery_power ;;
-		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
+		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02-c1 | qcom,ipq9574-ap-al02-c2 | qcom,ipq9574-ap-al02-c3 | qcom,ipq9574-ap-al02-c4 | qcom,ipq9574-ap-al02-c5 | qcom,ipq9574-ap-al02-c10)
 			ipq9574_battery_power ;;
 		esac ;;
 esac
