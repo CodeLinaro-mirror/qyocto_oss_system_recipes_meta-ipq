@@ -13,7 +13,7 @@ SYSUPGRADE_ipq53xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
 
 # IPQ_BASE_PKGS = "button-hotplug"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug datarmnet modemmanager tcpdump nghttp2 wolfssl"
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iw dhcp-server wireless-tools mcproxy nat46 ntp"
