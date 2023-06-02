@@ -34,7 +34,7 @@ NSS_ipq53xx = "${SSDK_NOHNAT_PKGS} \
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
-UTILS_remove = " rp-pppoe pdt "
+UTILS_remove = " perf rp-pppoe pdt "
 
 IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
 IPQ_BASE_PKGS_append = " ipq-board "
