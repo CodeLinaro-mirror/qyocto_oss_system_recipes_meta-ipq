@@ -16,7 +16,7 @@ SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables iw dhcp-server wireless-tools mcproxy nat46 ntp"
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables open-iw dhcp-server wireless-tools mcproxy nat46 ntp"
 
 NSS_PKGS += " \
 	    qca-nss-dp \
@@ -48,7 +48,7 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
 
-WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon athtestcmd "
+WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files open-iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon athtestcmd "
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
