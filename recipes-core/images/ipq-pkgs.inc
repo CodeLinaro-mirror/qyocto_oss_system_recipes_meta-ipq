@@ -47,13 +47,15 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon athtestcmd qca-afc qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
+AFC_PKGS = "qca-afc qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
+
+WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm qca-cnssdiag qca-cnss-daemon athtestcmd "
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
 FWA_PKGS = "qca-diag rmnetctl qdl kickstart"
 
-TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade"
+TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${AFC_PKGS} "
 
 QYOCTO_TEST_PKGS = " iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba tcpdump ntfs-3g perf stress-ng pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
 
