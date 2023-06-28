@@ -40,7 +40,7 @@ echo "Found $(lsb_release -d | awk -F: '{print $2}') OS installed on this system
 
 dpkg --list > ${logdir}/pkgs_found_before.log 2>&1
 
-apt-get -y install make gcc g++ diffstat texinfo chrpath bc gcc-multilib git gawk build-essential autoconf libtool libncurses-dev gettext gperf lib32z1 libc6-i386 g++-multilib python-git
+apt-get -y install make gcc g++ diffstat texinfo chrpath bc gcc-multilib git gawk build-essential autoconf libtool libncurses-dev gettext gperf lib32z1 libc6-i386 g++-multilib python3-git bison
 
 #coccienlle 1.1.1 needs to be installed from source code
 if [[ $(lsb_release -rs) != "22.04" ]]; then
