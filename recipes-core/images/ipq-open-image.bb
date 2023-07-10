@@ -45,8 +45,7 @@ EXTRA_IMAGEDEPENDS += " \
 		"
 UTILS_remove = " perf rp-pppoe pdt "
 
-IPQ_BASE_PKGS_remove = " ipq-boot ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
-IPQ_BASE_PKGS_append = " ipq-board "
+IPQ_BASE_PKGS_remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
 IPQ95XX_NSS_PKGS_remove = " strongswan "
 IPQ53XX_NSS_PKGS_remove = " strongswan "
 
