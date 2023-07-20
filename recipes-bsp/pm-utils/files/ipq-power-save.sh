@@ -489,14 +489,79 @@ ipq4019_ap_dk04_1_battery_power()
 	echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 }
 
+ipq8074_phy_power_on()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq8074-ap-hk01-c1 | qcom,ipq8074-ap-hk01-c3 | qcom,ipq8074-ap-hk01-c4 | qcom,ipq8074-ap-hk01-c5 | qcom,ipq8074-ap-hk01-c6 | qcom,ipq8074-ap-hk07 |\
+		qcom,ipq8074-ap-hk09 | qcom,ipq8074-ap-hk10-c1 | qcom,ipq8074-ap-hk10-c2 | qcom,ipq8074-ap-hk11-c1 | qcom,ipq8074-ap-hk12 | ap-ac01 | ap-ac02 | ap-oak03 | db-hk01 | db-hk02)
+		ssdk_sh port poweron set 2
+		ssdk_sh port poweron set 3
+		ssdk_sh port poweron set 4
+		ssdk_sh port poweron set 5
+		ssdk_sh port poweron set 6
+		;;
+		qcom,ipq8074-ap-hk01-c2 | qcom,ipq8074-ap-oak02 | qcom,ipq8074-ap-hk14)
+		ssdk_sh port poweron set 2
+		ssdk_sh port poweron set 3
+		ssdk_sh port poweron set 4
+		ssdk_sh port poweron set 6
+		;;
+		qcom,ipq8074-ap-hk02 | qcom,ipq8074-ap-hk08)
+		ssdk_sh port poweron set 5
+		ssdk_sh port poweron set 6
+		;;
+		ap-ac03 | ap-ac04)
+		ssdk_sh port poweron set 2
+		ssdk_sh port poweron set 3
+		ssdk_sh port poweron set 4
+		ssdk_sh port poweron set 5
+		;;
+	esac
+}
+
+ipq8074_phy_power_off()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq8074-ap-hk01-c1 | qcom,ipq8074-ap-hk01-c3 | qcom,ipq8074-ap-hk01-c4 | qcom,ipq8074-ap-hk01-c5 | qcom,ipq8074-ap-hk01-c6 | qcom,ipq8074-ap-hk07 |\
+		qcom,ipq8074-ap-hk09 | qcom,ipq8074-ap-hk10-c1 | qcom,ipq8074-ap-hk10-c2 | qcom,ipq8074-ap-hk11-c1 | qcom,ipq8074-ap-hk12 | ap-ac01 | ap-ac02 | ap-oak03 | db-hk01 | db-hk02)
+		ssdk_sh port poweroff set 2
+		ssdk_sh port poweroff set 3
+		ssdk_sh port poweroff set 4
+		ssdk_sh port poweroff set 5
+		ssdk_sh port poweroff set 6
+		;;
+		qcom,ipq8074-ap-hk01-c2 | qcom,ipq8074-ap-oak02 | qcom,ipq8074-ap-hk14)
+		ssdk_sh port poweroff set 2
+		ssdk_sh port poweroff set 3
+		ssdk_sh port poweroff set 4
+		ssdk_sh port poweroff set 6
+		;;
+		qcom,ipq8074-ap-hk02 | qcom,ipq8074-ap-hk08)
+		ssdk_sh port poweroff set 5
+		ssdk_sh port poweroff set 6
+		;;
+		ap-ac03 | ap-ac04)
+		ssdk_sh port poweroff set 2
+		ssdk_sh port poweroff set 3
+		ssdk_sh port poweroff set 4
+		ssdk_sh port poweroff set 5
+		;;
+	esac
+}
+
 ipq8074_ac_power()
 {
 	echo "Entering AC-Power Mode"
 # Cortex Power-UP Sequence
 	/etc/init.d/powerctl restart
 
+# Enabling Auto scale on NSS cores
+	echo 1 > /proc/sys/dev/nss/clock/auto_scale
+
 # Power on Malibu PHY of LAN ports
-	# ssdk_sh port poweron sequence goes here
+	ipq8074_phy_power_on
 
 # PCIe Power-UP Sequence
 	sleep 1
@@ -506,17 +571,54 @@ ipq8074_ac_power()
 
 	sleep 1
 
-# Wifi Power-up Sequence
-	# wifi powerup sequence goes here
-
 # USB Power-UP Sequence
-	# USB powerup sequence goes here
-
+	if [ -e /lib/modules/$(uname -r)/dwc3-of-simple.ko ]
+	then
+		modprobe phy-msm-ssusb-qmp
+		modprobe phy-msm-qusb
+		modprobe dbm
+		modprobe dwc3-of-simple
+		modprobe dwc3
+		modprobe u_qdss
+		modprobe usb_f_qdss
+	elif [ -e /lib/modules/$(uname -r)/kernel/drivers/usb/dwc3/dwc3-qcom.ko ]
+	then
+		modprobe phy-qcom-qusb2
+		modprobe dwc3-qcom
+		modprobe dwc3
+		modprobe usb_f_qdss
+	fi
 # LAN interface up
-	ifup lan
+	/etc/utopia/service.d/service_lan.sh lan-start
+
+# Wifi Power-up Sequence
+	if [ -f /lib/modules/$(uname -r)/ath11k.ko ]; then
+		modprobe ath11k
+		modprobe ath11k_ahb
+		modprobe ath11k_pci
+		sleep 2
+		/etc/utopia/service.d/service_wlan.sh wlan-start
+	else
+		/usr/bin/rdk_qca_wifi.sh powersave_false
+	fi
+
 
 # SD/MMC Power-UP sequence
-	# SD/MMC powerup sequence goes here
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		for sd_drvname in $(cat /tmp/sysinfo/sd_drvname)
+		do
+			echo $sd_drvname > /sys/bus/platform/drivers/sdhci_msm/bind
+		done
+	fi
+
+	if [ -f /tmp/sysinfo/sd1_drvname ]
+	then
+		sd1_drvname=$(cat /tmp/sysinfo/sd1_drvname)
+		echo $sd1_drvname > /sys/bus/platform/drivers/sdhci_msm/bind
+	fi
+
 	sleep 1
 
 	exit 0
@@ -525,6 +627,18 @@ ipq8074_ac_power()
 ipq8074_battery_power()
 {
 	echo "Entering Battery Mode..."
+
+# Wifi Power-down Sequence
+	lsmod | grep ath11k > /dev/null
+	if [ $? -eq 0 ]; then
+		/etc/utopia/service.d/service_wlan.sh wlan-stop
+		sleep 2
+		rmmod ath11k_pci
+		rmmod ath11k_ahb
+		rmmod ath11k
+	else
+		/usr/bin/rdk_qca_wifi.sh powersave_true
+	fi
 
 
 # PCIe Power-Down Sequence
@@ -555,25 +669,94 @@ ipq8074_battery_power()
 	}
 	sleep 1
 
-# Wifi Power-down Sequence
-	# wifi unload sequence goes here
 
 # Find scsi devices and remove it
+	partition=`cat /proc/partitions | awk -F " " '{print $4}'`
+
+	for entry in $partition; do
+		sd_entry=$(echo $entry | cut -c 2)
+
+		if [ "$sd_entry" = "sd" ]; then
+			[ -f /sys/block/$entry/device/delete ] && {
+				echo 1 > /sys/block/$entry/device/delete
+			}
+		fi
+	done
 
 # Power off Malibu PHY of LAN ports
-	# ssdk_sh port poweroff sequence goes here
+	ipq8074_phy_power_off
 
 # USB Power-down Sequence
-	# USB power down sequence goes here
+	if [ -d config/usb_gadget/g1 ]
+	then
+		echo "" > /config/usb_gadget/g1/UDC
+	fi
 
+	if [ -d /sys/module/dwc3_of_simple ]
+	then
+		rmmod usb_f_qdss
+		rmmod u_qdss
+		rmmod dwc3
+		rmmod dwc3-of-simple
+		rmmod dbm
+		rmmod phy_msm_qusb
+		rmmod phy_msm_ssusb_qmp
+	elif [ -d /sys/module/dwc3_qcom ]
+	then
+		rmmod usb_f_qdss
+		rmmod dwc3
+		rmmod dwc3_qcom
+		rmmod phy_qcom_qusb2
+	fi
 	sleep 2
-#SD/MMC Power-down Sequence
-	# SD/MMC powerdown sequence goes here
+	sleep 2
+
+##SD/MMC Power-down Sequence
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		rm /tmp/sysinfo/sd_drvname
+		for device in /sys/block/mmcblk0 /sys/block/mmcblk1
+		do
+		if [ -d $device ]; then
+			sd_drvname=`readlink $device | grep -o "[0-9]*.sdhci"`
+			echo "$sd_drvname" >> /tmp/sysinfo/sd_drvname
+			echo $sd_drvname >> /sys/bus/platform/drivers/sdhci_msm/unbind
+		fi
+		done
+	else
+		rm /tmp/sysinfo/sd1_drvname
+		if [ -z "${emmcblock##*mmcblk1*}" ] ;then
+			sd1_drvname=`readlink /sys/block/mmcblk0 | grep -o "[0-9]*.sdhci"`
+			echo "$sd1_drvname" > /tmp/sysinfo/sd1_drvname
+			echo $sd1_drvname > /sys/bus/platform/drivers/sdhci_msm/unbind
+		else
+			sd1_drvname=`readlink /sys/block/mmcblk1 | grep -o "[0-9]*.sdhci"`
+			echo "$sd1_drvname" > /tmp/sysinfo/sd1_drvname
+			echo $sd1_drvname > /sys/bus/platform/drivers/sdhci_msm/unbind
+		fi
+	fi
+
 
 # LAN interface down
-	ifdown lan
+	/etc/utopia/service.d/service_lan.sh lan-stop
+# Disabling Auto scale on NSS cores
+	echo 0 > /proc/sys/dev/nss/clock/auto_scale
+
+# Scaling Down UBI Cores
+	local board=$(ipq_board_name)
+	case "$board" in
+
+		ap-ac*)
+			echo 187200000 > /proc/sys/dev/nss/clock/current_freq;
+			;;
+		*)
+			echo 748800000 > /proc/sys/dev/nss/clock/current_freq;
+			;;
+	esac
 
 # Cortex Power-down Sequence
+	echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
 }
 
@@ -769,9 +952,9 @@ case "$1" in
 			ipq4019_ap_dk01_1_ac_power ;;
 		ap-dk04.1-c1 | ap-dk04.1-c2 | ap-dk04.1-c3 | ap-dk04.1-c4 | ap-dk04.1-c5 | ap-dk06.1-c1 | ap-dk07.1-c1 | ap-dk07.1-c2)
 			ipq4019_ap_dk04_1_ac_power ;;
-		hk01)
+		qcom,ipq8074-ap-hk*)
 			ipq8074_ac_power ;;
-		qcom,ipq9574-ap-al01-c1 | qcom,ipq9574-ap-al02*)
+		qcom,ipq9574-ap-al*)
 			ipq9574_ac_power ;;
 		esac ;;
 	true)
@@ -782,7 +965,7 @@ case "$1" in
 			ipq4019_ap_dk01_1_battery_power ;;
 		ap-dk04.1-c1 | ap-dk04.1-c2 | ap-dk04.1-c3 | ap-dk04.1-c4 | ap-dk04.1-c5 | ap-dk06.1-c1 | ap-dk07.1-c1 | ap-dk07.1-c2)
 			ipq4019_ap_dk04_1_battery_power ;;
-		hk01)
+		qcom,ipq8074-ap-hk*)
 			ipq8074_battery_power ;;
 		qcom,ipq9574-ap-al*)
 			ipq9574_battery_power ;;
