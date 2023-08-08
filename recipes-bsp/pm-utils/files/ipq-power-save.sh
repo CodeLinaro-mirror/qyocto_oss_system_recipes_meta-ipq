@@ -76,6 +76,21 @@ ipq40xx_power_auto() {
         echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
 }
 
+ipq807x_power_auto() {
+	# change scaling governor as ondemand to enable clock scaling based on system load
+	echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+	# Change sampling rate for frequency scaling decisions to 1s, from 10 ms
+	echo "1000000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+	# Change sampling rate for frequency down scaling decision to 10s
+	echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+
+	# Change the CPU load threshold above which frequency is up-scaled to
+	# turbo frequency,to 50%
+	echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+}
+
 ipq9574_power_auto() {
 	# change scaling governor as ondemand to enable clock scaling based on system load
 	echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -555,7 +570,7 @@ ipq8074_ac_power()
 {
 	echo "Entering AC-Power Mode"
 # Cortex Power-UP Sequence
-	/etc/init.d/powerctl restart
+	ipq807x_power_auto
 
 # Enabling Auto scale on NSS cores
 	echo 1 > /proc/sys/dev/nss/clock/auto_scale
@@ -568,7 +583,6 @@ ipq8074_ac_power()
 	echo 1 > /sys/bus/pci/rcrescan
 	sleep 2
 	echo 1 > /sys/bus/pci/rescan
-
 	sleep 1
 
 # USB Power-UP Sequence
@@ -669,7 +683,6 @@ ipq8074_battery_power()
 	}
 	sleep 1
 
-
 # Find scsi devices and remove it
 	partition=`cat /proc/partitions | awk -F " " '{print $4}'`
 
@@ -709,7 +722,6 @@ ipq8074_battery_power()
 		rmmod phy_qcom_qusb2
 	fi
 	sleep 2
-	sleep 2
 
 ##SD/MMC Power-down Sequence
 	local emmcblock="$(find_mmc_part "rootfs")"
@@ -736,7 +748,6 @@ ipq8074_battery_power()
 			echo $sd1_drvname > /sys/bus/platform/drivers/sdhci_msm/unbind
 		fi
 	fi
-
 
 # LAN interface down
 	/etc/utopia/service.d/service_lan.sh lan-stop
