@@ -53,7 +53,7 @@ IMAGE_CMD_ubi() {
    cp -afn $(find $(find ${BASE_WORKDIR}/${MACHINE_ARCH}${HOST_VENDOR}-${HOST_OS}/ -name image) -name *.ko) ${IMGDEPLOYDIR}/debug/modules
 }
 
-do_rootfs_append() {
+do_rootfs:append() {
     bb.build.exec_func("do_prebuiltfunction",d)
 }
 

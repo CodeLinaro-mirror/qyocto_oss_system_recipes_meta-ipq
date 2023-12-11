@@ -12,5 +12,13 @@ IMAGE_INSTALL += " \
 	"
 
 EXTRA_IMAGEDEPENDS += " \
-		${TEST_PKGS} \
+		${QYOCTO_TEST_PKGS} \
 		"
+
+EXTRA_IMAGEDEPENDS:remove = "${QYOCTO_TEST_PKGS}"
+
+IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
+
+UTILS:remove = " rp-pppoe pdt "
+
+NETWORK_PKGS:remove = " dhcp-server iw ntp "

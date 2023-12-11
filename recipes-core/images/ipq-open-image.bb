@@ -43,14 +43,14 @@ NSS_ipq807x = "${SSDK_NOHNAT_PKGS} \
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
-UTILS_remove = " perf rp-pppoe pdt "
+UTILS:remove = " perf rp-pppoe pdt "
 
-IPQ_BASE_PKGS_remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
-IPQ95XX_NSS_PKGS_remove = " strongswan "
-IPQ53XX_NSS_PKGS_remove = " strongswan "
+IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
+IPQ95XX_NSS_PKGS:remove = " strongswan "
+IPQ53XX_NSS_PKGS:remove = " strongswan "
 
-NETWORK_PKGS_remove = " iw ntp"
-NETWORK_PKGS_append = " open-iw open-hostapd open-mac80211 iperf ath-driver-init dhcp-client "
+NETWORK_PKGS:remove = " iw ntp"
+NETWORK_PKGS:append = " open-iw open-hostapd open-mac80211 iperf ath-driver-init dhcp-client "
 LC_ALL = "C"
 
 do_getprofiletype () {
