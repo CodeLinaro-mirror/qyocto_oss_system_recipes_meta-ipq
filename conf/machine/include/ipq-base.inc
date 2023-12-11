@@ -2,7 +2,7 @@ SOC_FAMILY = "IPQ"
 
 DEFAULTTUNE ?= "cortexa7thf-neon-vfpv4"
 include conf/machine/include/soc-family.inc
-include conf/machine/include/tune-cortexa7.inc
+include conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 IMAGE_FSTYPES = "squashfs squashfs-xz ubi ext4"
 MKUBIFS_ARGS = "-m 2048 -e 124KiB -c 4096 -U -F"
