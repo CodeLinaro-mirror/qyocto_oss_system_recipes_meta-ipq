@@ -1,10 +1,10 @@
 LICENSE = "ISC"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://ipq-power-save.sh \
 	file://cold_boot.sh "
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/etc/pm/power.d/
 	install -m 0755 ${WORKDIR}/ipq-power-save.sh ${D}/etc/pm/power.d/
 	install -m 0755 ${WORKDIR}/cold_boot.sh ${D}/etc/pm/power.d/
@@ -13,4 +13,4 @@ do_install_append() {
 	rm -rf ${D}/usr/lib/pm-utils/power.d/
 }
 
-FILES_${PN} += "${sysconfdir}/*"
+FILES:${PN} += "${sysconfdir}/*"
