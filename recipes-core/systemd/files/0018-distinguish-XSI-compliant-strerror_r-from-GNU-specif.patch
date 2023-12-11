@@ -23,11 +23,11 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  src/libsystemd/sd-bus/bus-error.c | 5 +++++
  2 files changed, 10 insertions(+)
 
-diff --git a/src/journal/journal-send.c b/src/journal/journal-send.c
-Index: git/src/journal/journal-send.c
+diff --git a/src/libsystemd/sd-journal/journal-send.c b/src/libsystemd/sd-journal/journal-send.c
+Index: git/src/libsystemd/sd-journal/journal-send.c
 ===================================================================
---- git.orig/src/journal/journal-send.c
-+++ git/src/journal/journal-send.c
+--- git.orig/src/libsystemd/sd-journal/journal-send.c
++++ git/src/libsystemd/sd-journal/journal-send.c
 @@ -355,7 +355,12 @@ static int fill_iovec_perror_and_send(co
                  char* j;
  

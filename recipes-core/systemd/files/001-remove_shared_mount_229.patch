@@ -1,13 +1,13 @@
 Index: git/src/core/mount-setup.c
 ===================================================================
---- git.orig/src/core/mount-setup.c	2017-11-01 18:07:55.000000000 +0530
-+++ git/src/core/mount-setup.c	2017-11-01 18:09:15.032208231 +0530
-@@ -396,7 +396,7 @@
-          * specific setups need other settings they can reset the
-          * propagation mode to private if needed. */
-         if (detect_container() <= 0)
+--- git.orig/src/shared/mount-setup.c	2017-11-01 18:07:55.000000000 +0530
++++ git/src/shared/mount-setup.c	2017-11-01 18:09:15.032208231 +0530
+@@ -550,7 +550,7 @@ int mount_setup(bool loaded_policy, bool
+          * container manager we assume the container manager knows what it is doing (for example, because it set up
+          * some directories with different propagation modes). */
+         if (detect_container() <= 0 && !leave_propagation)
 -                if (mount(NULL, "/", NULL, MS_REC|MS_SHARED, NULL) < 0)
 +                if (mount(NULL, "/", NULL, MS_REC|MS_PRIVATE, NULL) < 0)
                          log_warning_errno(errno, "Failed to set up the root directory for shared mount propagation: %m");
- 
-         /* Create a few directories we always want around, Note that
+
+         /* Create a few directories we always want around, Note that sd_booted() checks for /run/systemd/system, so
