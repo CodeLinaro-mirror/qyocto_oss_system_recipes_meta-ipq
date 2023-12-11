@@ -37,14 +37,14 @@ UBOOT_ELF = "u-boot"
 UBOOT_ELF_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.${UBOOT_ELF_SUFFIX}"
 UBOOT_ELF_BINARY ?= "u-boot.${UBOOT_ELF_SUFFIX}"
 
-CFLAGS_append = "-Wno-error=address-of-packed-member -Wno-error "
+CFLAGS:append = " -Wno-error=address-of-packed-member -Wno-error "
 do_configure () {
 	oe_runmake -C ${S} O=${B} mrproper
 	sed -i 's/HOSTCC       = cc/HOSTCC       = gcc/g' ${S}/Makefile
 	oe_runmake -C ${S} O=${B} ${UBOOT_MACHINE}
 }
 
-do_compile_prepend() {
+do_compile:prepend() {
 	mkdir -p ${B}/arch/ ${B}/arch/${UBOOT_ARCH}/ ${B}/arch/${UBOOT_ARCH}/dts
 	cp -rf  ${S}/arch/${UBOOT_ARCH}/dts/* ${B}/arch/${UBOOT_ARCH}/dts/
 }
@@ -59,9 +59,9 @@ do_install() {
         install -m 0755 ${B}/tools/dumpimage ${D}${bindir}/dumpimage
 }
 
-do_deploy_append() {
+do_deploy:append() {
 	cp u-boot-${MACHINE}-${PV}-${PR}.${UBOOT_ELF_SUFFIX} u-boot-${MACHINE}-${PV}-${PR}-stripped.${UBOOT_ELF_SUFFIX}
 	${STRIP} u-boot-${MACHINE}-${PV}-${PR}-stripped.${UBOOT_ELF_SUFFIX}
 }
-FILES_${PN}-env = " ${bindir}/dumpimage "
-INSANE_SKIP_${PN}-env += "ldflags"
+FILES:${PN}-env = " ${bindir}/dumpimage "
+INSANE_SKIP:${PN}-env += "ldflags"

@@ -33,7 +33,7 @@ do_compile() {
 	make CROSS_COMPILE=${TARGET_PREFIX} LDFLAGS="${UBOOT_LDFLAGS}" HOSTSTRIP=true
 }
 
-do_deploy_append() {
+do_deploy:append() {
 	install ${S}/${UBOOT_ELF} ${DEPLOYDIR}/${UBOOT_ELF_IMAGE}
 	if [ ! -e ${UBOOT_ELF_BINARY} ]; then
 		ln -sf ${UBOOT_ELF_IMAGE} ${UBOOT_ELF_BINARY}
