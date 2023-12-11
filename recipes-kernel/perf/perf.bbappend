@@ -1,8 +1,8 @@
 
 
-RDEPENDS_${PN}_remove = "elfutils"
+RDEPENDS:${PN}:remove = "elfutils"
 # DEPENDS_${PN}_append = "elfutils"
-DEPENDS_append = " elfutils"
+DEPENDS:append = " elfutils "
 
 EXTRA_OEMAKE = '\
     -C ${S}/tools/perf \
