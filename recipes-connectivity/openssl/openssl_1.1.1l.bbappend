@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_append := "${THISDIR}/files:"
+FILESEXTRAPATHS:append := "${THISDIR}/files:"
 
 DEPENDS += " cryptodev-linux "
 
