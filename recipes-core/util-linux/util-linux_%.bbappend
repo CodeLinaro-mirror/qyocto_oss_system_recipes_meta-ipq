@@ -1,1 +1,1 @@
-EXTRA_OECONF_remove += " --enable-raw"
+EXTRA_OECONF:remove = " --enable-raw "

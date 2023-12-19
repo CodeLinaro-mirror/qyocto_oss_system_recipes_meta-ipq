@@ -4,9 +4,9 @@ SRC_URI += "file://fragment.cfg;subdir=busybox-1.31.1 \
             file://telnet.init \
             "
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/etc/init.d/
 	install -m 0755 ${WORKDIR}/telnet.init ${D}/etc/init.d/telnet
 }
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
