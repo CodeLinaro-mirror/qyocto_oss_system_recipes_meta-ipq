@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64||ip
 
 KMACHINE = "${MACHINE}"
 
-INSANE_SKIP_kernel-dev = "debug-files"
+INSANE_SKIP:kernel-dev = "debug-files"
 
 PARALLEL_MAKE = ""
 KARCH ?= "arm"
@@ -140,7 +140,7 @@ install_fit_images() {
 
 }
 
-do_deploy_append() {
+do_deploy:append() {
 
 	generate_its
 	mkdir -p ${DEPLOYDIR}/dtbs

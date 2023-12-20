@@ -60,7 +60,7 @@ copy_kernel_config() {
 	fi
 }
 
-do_configure_prepend() {
+do_configure:prepend() {
 	sed -i 's/EXTRA_CFLAGS/ccflags-y/g' ${S}/lib/lzma/Makefile
 	sed -i 's+-I+-I$(srctree)/+g' ${S}/lib/lzma/Makefile
 	# cleanup existing .config
@@ -125,7 +125,7 @@ do_configure_prepend() {
 
 
 
-do_install_append() {
+do_install:append() {
         oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
         install -d ${D}/boot
         make dtbs || true
@@ -133,5 +133,5 @@ do_install_append() {
 }
 
 PACKAGES =+ "kernel-headers ${PN}"
-FILES_kernel-headers = "${exec_prefix}/src/linux*"
-FILES_${PN} += "/boot/*"
+FILES:kernel-headers = "${exec_prefix}/src/linux*"
+FILES:${PN} += "/boot/*"

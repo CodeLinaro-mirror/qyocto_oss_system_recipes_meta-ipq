@@ -23,11 +23,11 @@ SRC_URI += "file://fit"
 
 # MAKEOPTS += KBUILD_VERBOSE=1
 # MAKEOPTS += KERNEL_SRC_PATH="$(STAGING_KERNEL_DIR)"
-EXTRA_CFLAGS += " -I${B}/../kernel"
+EXTRA_CFLAGS += " -I${B}/../kernel -Wno-error=misleading-indentation "
 EXTRA_OEMAKE += " \
         EXTRA_CFLAGS='${EXTRA_CFLAGS}' \
         "
-#EXTRA_OEMAKE_append += " \
+#EXTRA_OEMAKE:append += " \
 #	KERNEL_SRC_PATH=$(STAGING_KERNEL_DIR) \
 #	"
 
