@@ -10,10 +10,17 @@ IMAGE_INSTALL += " \
 	${NETWORK_PKGS} \
 	${UTILS} \
 	"
+NSS_ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
+		  ${NSS_PKGS} \
+		  ${IPQ95XX_NSS_PKGS} \
+		  "
 
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
+IMAGE_INSTALL += " \
+		  ${NSS_ipq95xx_64} \
+		  "
 
 IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
 
