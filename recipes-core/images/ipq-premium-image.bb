@@ -9,6 +9,7 @@ IMAGE_INSTALL += " \
 	${QYOCTO_PKGS} \
 	${NETWORK_PKGS} \
 	${UTILS} \
+	${WIFI_PKGS} \
 	"
 NSS_ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
 		  ${NSS_PKGS} \
