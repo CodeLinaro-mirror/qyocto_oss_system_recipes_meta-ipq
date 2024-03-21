@@ -52,7 +52,7 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
 
-WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-hostapd-macsec qca-wpasupplicant-macsec qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files open-iw wireless-tools hostapd-scripts wpasupplicant-scripts"
+WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-hostapd-macsec qca-wpasupplicant-macsec qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files open-iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm"
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
