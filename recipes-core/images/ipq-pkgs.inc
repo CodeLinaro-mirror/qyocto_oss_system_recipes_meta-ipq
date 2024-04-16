@@ -17,7 +17,7 @@ SYSUPGRADE_ipq807x = "u-boot-2016-env sysupgrade "
 
 FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv  util-ubus gpon-server"
 
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl i2c-tools "
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug modemmanager tcpdump libnghttp2 wolfssl i2c-tools "
 
 # NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables open-iw dhcp-server wireless-tools mcproxy nat46 ntp"
@@ -57,9 +57,9 @@ WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-hostapd-macsec qca-wpasupplicant
 
 MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
 
-WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl"
+WIFI_EZMESH_PKGS = "qca-whc-repacd qca-wsplcd qca-hyctl"
 
-FWA_PKGS = "qca-diag rmnetctl qdl kickstart"
+FWA_PKGS = "qca-diag"
 
 TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz gptfdisk iperf samba ntfs-3g perf stress-ng ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils  security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${AFC_PKGS} ${WIFI_EZMESH_PKGS} "
 
