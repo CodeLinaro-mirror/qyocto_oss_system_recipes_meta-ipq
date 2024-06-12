@@ -61,6 +61,7 @@ copy_kernel_config() {
 }
 
 do_configure:prepend() {
+	cp -rf ${TOPDIR}/../files-6.6/* ${S}/
 	sed -i 's/EXTRA_CFLAGS/ccflags-y/g' ${S}/lib/lzma/Makefile
 	sed -i 's+-I+-I$(srctree)/+g' ${S}/lib/lzma/Makefile
 	# cleanup existing .config

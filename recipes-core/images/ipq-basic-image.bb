@@ -8,14 +8,12 @@ IMAGE_INSTALL += " \
 	kernel-modules \
 	${IPQ_BASE_PKGS} \
 	${QYOCTO_PKGS} \
-	${NETWORK_PKGS} \
 	${UTILS} \
-	${SSDK_NOHNAT_PKGS} \
 	"
 
-EXTRA_IMAGEDEPENDS += " \
-		${QYOCTO_TEST_PKGS} \
-		"
+#EXTRA_IMAGEDEPENDS += " \
+#		${QYOCTO_TEST_PKGS} \
+#		"
 
 
 IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "

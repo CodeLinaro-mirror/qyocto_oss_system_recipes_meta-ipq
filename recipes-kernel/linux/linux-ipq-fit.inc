@@ -1,9 +1,9 @@
 
 LICENSE = "GPLv2"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64||ipq53xx||ipq53xx_64)"
+COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64||ipq53xx||ipq53xx_64|ipq54xx_64|ipq54xx)"
 
 KMACHINE = "${MACHINE}"
 
@@ -20,6 +20,8 @@ FIT_IMAGE_NAME_ipq95xx = "ipq95xx-ap.alxx.itb"
 FIT_IMAGE_NAME_ipq95xx_64 = "ipq95xx-ap.alxx.itb"
 FIT_IMAGE_NAME_ipq53xx = "ipq53xx-ap.mixx.itb"
 FIT_IMAGE_NAME_ipq53xx_64 = "ipq53xx-ap.mixx.itb"
+FIT_IMAGE_NAME_ipq54xx = "ipq54xx-ap.maxx.itb"
+FIT_IMAGE_NAME_ipq54xx_64 = "ipq54xx-ap.maxx.itb"
 SOC_TYPE = "${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 
 mk_fit_images() {
@@ -46,16 +48,16 @@ generate_FDT() {
 	board_name=$2
 
 	cat << EOF >> ${B}/../fit/multi.its
-		fdt@${board_name} {
+		fdt-${board_name} {
 			description = "${name} Tree blob";
 			data = /incbin/("${B}/arch/${KARCH}/boot/dts/${DTB_PATH}/${name}.dtb");
 			type = "flat_dt";
-			arch = "arm";
+			arch = "ARCH";
 			compression = "none";
-			hash@1 {
+			hash-1 {
 				algo = "crc32";
 			};
-			hash@2 {
+			hash-2 {
 				algo = "sha1";
 			};
 		};
@@ -66,10 +68,10 @@ generate_CONFIG() {
 	board_name=$1
 
 	cat << EOF >> ${B}/../fit/multi.its
-		config@${board_name} {
+		config-${board_name} {
 			description = DESCRIPTION;
-			kernel = "kernel@1";
-			fdt = "fdt@${board_name}";
+			kernel = "kernel-1";
+			fdt = "fdt-${board_name}";
 		};
 EOF
 }
@@ -116,7 +118,7 @@ generate_its() {
 	cat << EOF >> ${B}/../fit/multi.its
 	};
 	configurations {
-		default = "config@1";
+		default = "config-1";
 EOF
 
 	i=0
