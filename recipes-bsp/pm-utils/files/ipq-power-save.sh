@@ -106,6 +106,21 @@ ipq9574_power_auto() {
 	echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
 }
 
+ipq5332_power_auto() {
+        # change scaling governor as ondemand to enable clock scaling based on system load
+        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+        # Change sampling rate for frequency scaling decisions to 1s, from 10 ms
+        echo "1000000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+        # Change sampling rate for frequency down scaling decision to 10s
+        echo 10 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+
+        # Change the CPU load threshold above which frequency is up-scaled to
+        # turbo frequency,to 50%
+        echo 50 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+}
+
 ipq8064_ac_power()
 {
 	echo "Entering AC-Power Mode"
@@ -953,6 +968,215 @@ ipq9574_battery_power()
 
 }
 
+ipq5332_phy_power_on()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq5332-ap-mi01.6 | qcom,ipq5332-ap-mi04.3)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweron set 1
+			ssdk_sh port poweron set 2
+			ssdk_sh port poweron set 3
+			echo 0 > /sys/ssdk/dev_id
+			;;
+		qcom,ipq5332-ap-mi01.2 | qcom,ipq5332-ap-mi01.4 | qcom,ipq5332-ap-mi01.3 | qcom,ipq5332-ap-mi04.1 |\
+		qcom,ipq5332-ap-mi01.9 | qcom,ipq5332-ap-mi01.2-qcn9160-c1 | qcom,ipq5332-ap-mi04.1-c2)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweron set 1
+			ssdk_sh port poweron set 2
+			ssdk_sh port poweron set 3
+			ssdk_sh port poweron set 4
+			echo 0 > /sys/ssdk/dev_id
+			;;
+		qcom,ipq5332-db-mi01.1 | qcom,ipq5332-db-mi03.1)
+			ssdk_sh port poweron set 1
+			;;
+		qcom,ipq5332-ap-mi03.1)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweron set 3
+			ssdk_sh port poweron set 4
+			ssdk_sh port poweron set 5
+			echo 0 > /sys/ssdk/dev_id
+			;;
+	esac
+}
+
+ipq5332_phy_power_off()
+{
+	local board=$(ipq_board_name)
+	case "$board" in
+		qcom,ipq5332-ap-mi01.6 | qcom,ipq5332-ap-mi04.3)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweroff set 1
+			ssdk_sh port poweroff set 2
+			ssdk_sh port poweroff set 3
+			echo 0 > /sys/ssdk/dev_id
+			;;
+		qcom,ipq5332-ap-mi01.2 | qcom,ipq5332-ap-mi01.4 | qcom,ipq5332-ap-mi01.3 | qcom,ipq5332-ap-mi04.1 |\
+		qcom,ipq5332-ap-mi01.9 | qcom,ipq5332-ap-mi01.2-qcn9160-c1 | qcom,ipq5332-ap-mi04.1-c2)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweroff set 1
+			ssdk_sh port poweroff set 2
+			ssdk_sh port poweroff set 3
+			ssdk_sh port poweroff set 4
+			echo 0 > /sys/ssdk/dev_id
+			;;
+		qcom,ipq5332-db-mi01.1 | qcom,ipq5332-db-mi03.1)
+			ssdk_sh port poweroff set 1
+			;;
+		qcom,ipq5332-ap-mi03.1)
+			echo 1 > /sys/ssdk/dev_id
+			ssdk_sh port poweroff set 3
+			ssdk_sh port poweroff set 4
+			ssdk_sh port poweroff set 5
+			echo 0 > /sys/ssdk/dev_id
+			;;
+	esac
+}
+
+ipq5332_ac_power()
+{
+	echo "Entering AC-Power Mode"
+# Cortex Power-UP Sequence
+	ipq5332_power_auto
+
+# Enabling Auto scale on NSS cores
+	echo 1 > /proc/sys/dev/nss/clock/auto_scale
+
+# Power on PHYs of LAN ports
+	ipq5332_phy_power_on
+# PCIe Power-UP Sequence
+	sleep 1
+	if [ -f /sys/bus/pci/rcrescan ]
+	then
+		echo 1 > /sys/bus/pci/rcrescan
+	else
+		echo 1 > /sys/bus/pci/rescan
+	fi
+	sleep 2
+
+# USB Power-UP Sequence
+	if [ -e /lib/modules/$(uname -r)/kernel/drivers/usb/dwc3/dwc3-qcom.ko ]
+	then
+		modprobe phy-qca-uniphy
+		modprobe phy-qca-m31
+		modprobe dwc3-qcom
+		modprobe dwc3
+		modprobe usb_f_qdss
+	fi
+
+	if [ -d config/usb_gadget/g1 ]
+	then
+		echo "8a00000.dwc3" > /config/usb_gadget/g1/UDC
+	fi
+
+# LAN interface up
+	/etc/utopia/service.d/service_lan.sh lan-start
+
+# Wifi Power-up Sequence
+	if [ -f /lib/modules/$(uname -r)/ath12k.ko ]; then
+		insmod ath12k
+		sleep 2
+		/etc/utopia/service.d/service_wlan.sh wlan-start
+	else
+		/usr/bin/rdk_qca_wifi.sh powersave_false
+	fi
+
+# SD/MMC Power-UP sequence
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		for sd_drvname in $(cat /tmp/sysinfo/sd_drvname)
+		do
+			echo $sd_drvname > /sys/bus/platform/drivers/sdhci_msm/bind
+		done
+	fi
+
+	sleep 1
+
+	exit 0
+}
+
+ipq5332_battery_power()
+{
+	echo "Entering Battery Mode..."
+
+# Wifi Power-down Sequence
+	lsmod | grep ath12k > /dev/null
+	if [ $? -eq 0 ]; then
+		/etc/utopia/service.d/service_wlan.sh wlan-stop
+		sleep 2
+		rmmod ath12k
+	else
+		/usr/bin/rdk_qca_wifi.sh powersave_true
+	fi
+
+# PCIe Power-Down Sequence
+	if [ -f /sys/bus/pci/rcremove ]
+	then
+		echo 1 > /sys/bus/pci/rcremove
+	else
+		for i in `ls /sys/bus/pci/devices/`; do
+			echo 1 > /sys/bus/pci/devices/${i}/remove
+		done
+	fi
+	sleep 1
+
+# Find scsi devices and remove it
+	partition=`cat /proc/partitions | awk -F " " '{print $4}'`
+
+	for entry in $partition; do
+		sd_entry=$(echo $entry | head -c 2)
+
+		if [ "$sd_entry" = "sd" ]; then
+			[ -f /sys/block/$entry/device/delete ] && {
+				echo 1 > /sys/block/$entry/device/delete
+			}
+		fi
+	done
+
+
+# Power off PHYs of LAN ports
+	ipq5332_phy_power_off
+# USB Power-down Sequence
+	if [ -d config/usb_gadget/g1 ]
+	then
+		echo "" > /config/usb_gadget/g1/UDC
+	fi
+
+	if [ -d /sys/module/dwc3_qcom ]
+	then
+		rmmod usb_f_qdss
+		rmmod dwc3
+		rmmod dwc3_qcom
+		rmmod phy-qca-uniphy.ko
+		rmmod phy-qca-m31.ko
+	fi
+	sleep 2
+
+#SD/MMC Power-down Sequence
+	local emmcblock="$(find_mmc_part "rootfs")"
+
+	if [ -z "$emmcblock" ]; then
+		rm /tmp/sysinfo/sd_drvname
+		if [ -d /sys/block/mmcblk0 ]; then
+			sd_drvname=`readlink /sys/block/mmcblk0 | grep -o "[0-9]*.sdhci[^/]*"`
+			echo "$sd_drvname" >> /tmp/sysinfo/sd_drvname
+			echo $sd_drvname >> /sys/bus/platform/drivers/sdhci_msm/unbind
+		fi
+	fi
+
+# LAN interface down
+	/etc/utopia/service.d/service_lan.sh lan-stop
+
+# Disabling Auto scale on NSS cores
+	echo 0 > /proc/sys/dev/nss/clock/auto_scale
+
+# Cortex Power-down Sequence
+	echo "powersave" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+}
+
 board=$(ipq_board_name)
 case "$1" in
 	false)
@@ -967,6 +1191,8 @@ case "$1" in
 			ipq8074_ac_power ;;
 		qcom,ipq9574-ap-al*)
 			ipq9574_ac_power ;;
+		qcom,ipq5332-ap-mi*)
+			ipq5332_ac_power ;;
 		esac ;;
 	true)
 		case "$board" in
@@ -980,5 +1206,7 @@ case "$1" in
 			ipq8074_battery_power ;;
 		qcom,ipq9574-ap-al*)
 			ipq9574_battery_power ;;
+		qcom,ipq5332-ap-mi*)
+			ipq5332_battery_power ;;
 		esac ;;
 esac
