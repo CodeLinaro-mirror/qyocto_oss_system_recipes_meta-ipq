@@ -4,6 +4,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://ipq-power-save.sh \
 	file://cold_boot.sh "
 
+RDEPENDS:${PN}:remove = "grep"
+
 do_install:append() {
 	install -d ${D}/etc/pm/power.d/
 	install -m 0755 ${WORKDIR}/ipq-power-save.sh ${D}/etc/pm/power.d/
