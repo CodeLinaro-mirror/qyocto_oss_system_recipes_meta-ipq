@@ -16,17 +16,17 @@ SYSUPGRADE_ipq807x_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE_ipq807x = "u-boot-2016-env sysupgrade "
 
 # IPQ_BASE_PKGS = "button-hotplug"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
 
-# NETWORK_PKGS = "qca-mcs-lkm qca-mcs-app"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables open-iw dhcp-server wireless-tools mcproxy nat46 ntp"
+# NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools"
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables dhcp-server mcproxy nat46 ntp qca-mcs-lkm"
 
 NSS_PKGS += " \
 	    qca-nss-dp \
 	    qca-nss-ecm \
 	    "
 
-QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-rule"
+QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-rule qca-nss-ppe-client"
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
@@ -54,7 +54,8 @@ AFC_PKGS = "qca-afc qca-afc-files qti-pairing qti-provisioning qti-mfg-provision
 
 WIFI_PKGS = "qca-hostapd  qca-wpasupplicant qca-hostapd-macsec qca-wpasupplicant-macsec qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss wififw-mount qca-wifi-files open-iw wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm"
 
-MCS_PKGS = "qca-mcs-lkm qca-mcs-app"
+MCS_PKGS = "qca-mcs-lkm"
+# "qca-mcs-app" is cnss dependent
 
 WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl"
 
