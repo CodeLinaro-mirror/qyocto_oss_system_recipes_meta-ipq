@@ -26,7 +26,7 @@ NSS_PKGS += " \
 	    qca-nss-ecm \
 	    "
 
-QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-l2tp qca-nss-ppe-rule qca-nss-ppe-client"
+QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-l2tp qca-nss-ppe-netlink qca-nss-ppe-rule qca-nss-ppe-client"
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
