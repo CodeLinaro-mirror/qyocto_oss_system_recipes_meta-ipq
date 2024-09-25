@@ -30,8 +30,9 @@ QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-n
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
-IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-nss-fw-eip-al qca-ovsmgr"
-IPQ53XX_NSS_PKGS += "qca-nss-ppe qca-nss-sfe qca-ovsmgr"
+IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-nss-fw-eip-al qca-ovsmgr qca-nss-dscpstats"
+IPQ53XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-nss-fw-eip-al qca-ovsmgr qca-nss-dscpstats"
+IPQ54XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-nss-fw-eip-al qca-ovsmgr qca-nss-dscpstats"
 IPQ807X_NSS_PKGS += "qca-nss-fw qca-nss-drv strongswan qca-nss-clients qca-nss-fw-eip-hk"
 
 QCA_NSS_FW = "qca-nss-fw"

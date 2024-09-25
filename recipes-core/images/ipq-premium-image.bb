@@ -18,6 +18,16 @@ NSS_ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
 		  ${IPQ95XX_NSS_PKGS} \
 		  "
 
+NSS_ipq53xx_64 = "${SSDK_NOHNAT_PKGS} \
+                  ${NSS_PKGS} \
+                  ${IPQ53XX_NSS_PKGS} \
+                  "
+
+NSS_ipq54xx_64 = "${SSDK_NOHNAT_PKGS} \
+                  ${NSS_PKGS} \
+                  ${IPQ54XX_NSS_PKGS} \
+                  "
+
 EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
