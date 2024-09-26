@@ -9,6 +9,8 @@ IMAGE_INSTALL += " \
 	${IPQ_BASE_PKGS} \
 	${QYOCTO_PKGS} \
 	${UTILS} \
+	${QCA_PHY_PKGS} \
+	${SSDK_NOHNAT_PKGS} \
 	"
 
 #EXTRA_IMAGEDEPENDS += " \
