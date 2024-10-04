@@ -36,3 +36,8 @@ EXTRA_OEMAKE += " \
 #  MAKEOPTS += __KERNEL__=1
 COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64|ipq53xx|ipq53xx_64|ipq54xx_64|ipq54xx)"
 KERNEL_IMAGETYPE ?= "Image"
+
+do_install:prepend() {
+	install -d ${D}/lib/modules/${KERNEL_VERSION}/
+	touch ${D}/lib/modules/${KERNEL_VERSION}/source
+}
