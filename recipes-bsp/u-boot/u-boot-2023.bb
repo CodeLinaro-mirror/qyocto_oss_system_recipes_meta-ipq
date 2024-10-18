@@ -65,7 +65,7 @@ do_configure () {
 
 do_compile() {
 	for config in ${UBOOT_MACHINE}; do
-		oe_runmake -C ${WORKDIR}/u-boot-${config} HOSTLDLIBS_mkimage="-static ${STAGING_INCDIR_NATIVE}/libressl-3.7.2/libssl.a ${STAGING_INCDIR_NATIVE}/libressl-3.7.2/libcrypto.a" ${UBOOT_MAKE_TARGET}
+		oe_runmake -C ${WORKDIR}/u-boot-${config} HOSTLDLIBS_mkimage="-static ${STAGING_INCDIR_NATIVE}/libressl-3.7.2/libssl.a ${STAGING_INCDIR_NATIVE}/libressl-3.7.2/libcrypto.a -lpthread" ${UBOOT_MAKE_TARGET}
 		touch ${WORKDIR}/u-boot-${config}/u-boot-initial-env
 	done
 }
