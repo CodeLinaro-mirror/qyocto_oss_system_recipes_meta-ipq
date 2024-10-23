@@ -13,17 +13,17 @@ IMAGE_INSTALL += " \
 #${WIFI_PKGS} \
 #Enable once wifi is enabled.
 
-NSS_ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
+NSS:ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
 		  ${NSS_PKGS} \
 		  ${IPQ95XX_NSS_PKGS} \
 		  "
 
-NSS_ipq53xx_64 = "${SSDK_NOHNAT_PKGS} \
+NSS:ipq53xx_64 = "${SSDK_NOHNAT_PKGS} \
                   ${NSS_PKGS} \
                   ${IPQ53XX_NSS_PKGS} \
                   "
 
-NSS_ipq54xx_64 = "${SSDK_NOHNAT_PKGS} \
+NSS:ipq54xx_64 = "${SSDK_NOHNAT_PKGS} \
                   ${NSS_PKGS} \
                   ${IPQ54XX_NSS_PKGS} \
                   "
@@ -32,7 +32,7 @@ EXTRA_IMAGEDEPENDS += " \
 		${QYOCTO_TEST_PKGS} \
 		"
 IMAGE_INSTALL += " \
-		  ${NSS_ipq95xx_64} \
+		  ${NSS} \
 		  "
 
 IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
