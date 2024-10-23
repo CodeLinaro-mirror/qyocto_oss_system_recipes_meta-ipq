@@ -19,7 +19,7 @@ SYSUPGRADE_ipq807x = "u-boot-2016-env sysupgrade "
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables dhcp-server mcproxy nat46 ntp qca-mcs-lkm"
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables dhcp-server mcproxy nat46 ntp qca-mcs-lkm qca-mcs-app"
 
 NSS_PKGS += " \
 	    qca-nss-dp \
