@@ -20,12 +20,10 @@ NSS:ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
 
 NSS:ipq53xx_64 = "${SSDK_NOHNAT_PKGS} \
                   ${NSS_PKGS} \
-                  ${IPQ53XX_NSS_PKGS} \
                   "
 
 NSS:ipq54xx_64 = "${SSDK_NOHNAT_PKGS} \
                   ${NSS_PKGS} \
-                  ${IPQ54XX_NSS_PKGS} \
                   "
 
 EXTRA_IMAGEDEPENDS += " \

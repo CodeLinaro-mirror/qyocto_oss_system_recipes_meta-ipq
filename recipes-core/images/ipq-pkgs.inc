@@ -12,28 +12,22 @@ SYSUPGRADE_ipq95xx = "u-boot-2016-env sysupgrade "
 SYSUPGRADE_ipq53xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
 
-SYSUPGRADE_ipq807x_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE_ipq807x = "u-boot-2016-env sysupgrade "
-
 # IPQ_BASE_PKGS = "button-hotplug"
 IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts ${SYSUPGRADE} button-hotplug gpio-button-hotplug datarmnet modemmanager tcpdump libnghttp2 wolfssl"
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools"
 NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables dhcp-server mcproxy nat46 ntp qca-mcs-lkm qca-mcs-app"
 
-NSS_PKGS += " \
-	    qca-nss-dp \
-	    qca-nss-ecm \
-	    "
-
 QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-l2tp qca-nss-ppe-netlink qca-nss-ppe-rule qca-nss-ppe-client"
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
-IPQ95XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-nss-fw-eip-al qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl"
-IPQ53XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl"
-IPQ54XX_NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl"
-IPQ807X_NSS_PKGS += "qca-nss-fw qca-nss-drv strongswan qca-nss-clients qca-nss-fw-eip-hk"
+NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl \
+	    qca-nss-dp \
+	    qca-nss-ecm \
+	    "
+
+IPQ95XX_NSS_PKGS += "qca-nss-fw-eip-al"
 
 QCA_NSS_FW = "qca-nss-fw"
 
