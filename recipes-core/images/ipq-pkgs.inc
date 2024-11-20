@@ -13,7 +13,7 @@ SYSUPGRADE_ipq53xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug modemmanager tcpdump wolfssl"
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug modemmanager tcpdump wolfssl i2c-tools"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
@@ -58,7 +58,7 @@ MCS_PKGS = "qca-mcs-lkm"
 WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl"
 
 #FWA_PKGS = "rmnetctl qdl kickstart"
-FWA_PKGS = "qca-diag"
+FWA_PKGS = " "
 
 #TEST_PKGS = "perf stress-ng security-assurance-test ${AFC_PKGS} ${WIFI_EZMESH_PKGS}"
 TEST_PKGS = "${FWA_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh ltp i2c-rw-utils lmbench cryptsetup squashfs4 qca-wlanfw-upgrade"
