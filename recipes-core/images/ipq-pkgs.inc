@@ -12,8 +12,11 @@ SYSUPGRADE_ipq95xx = "u-boot-2016-env sysupgrade "
 SYSUPGRADE_ipq53xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
 
+SYSUPGRADE_ipq54xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE_ipq54xx = "u-boot-2016-env sysupgrade "
+
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug modemmanager tcpdump wolfssl i2c-tools"
+IPQ_BASE_PKGS = "sysstat strace e2fsprogs kexec-tools u-boot-fw-utils  mtd mtd-utils mtd-utils-ubifs initoverlay wififw-mount qca-qmi-framework qca-diag qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug modemmanager tcpdump wolfssl i2c-tools ${SYSUPGRADE}"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
