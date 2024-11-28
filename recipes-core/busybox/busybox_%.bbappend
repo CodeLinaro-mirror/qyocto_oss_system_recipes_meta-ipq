@@ -1,6 +1,6 @@
 
-SRC_URI += "file://fragment.cfg;subdir=busybox-1.31.1 \
-            file://lock.c;subdir=busybox-1.31.1/miscutils \
+SRC_URI += "file://fragment.cfg;subdir=busybox-1.35.0 \
+            file://lock.c;subdir=busybox-1.35.0/miscutils \
             file://telnet.init \
             "
 
