@@ -43,7 +43,7 @@ QCA_EDMA = "qca-edma"
 
 SSDK_NOHNAT_PKGS ="qca-ssdk-nohnat qca-ssdk-shell qca-macsec"
 
-QCA_PHY_PKGS = "qca-nss-phy"
+QCA_PHY_PKGS = "qca-nss-phy aqr-phy"
 
 SSDK_HNAT_PKGS ="qca-ssdk-hnat qca-ssdk-shell"
 
