@@ -6192,3 +6192,6 @@ CONFIG_ARCH_USE_MEMTEST=y
 #
 # end of Rust hacking
 # end of Kernel hacking
+CONFIG_NET_DSA=y
+CONFIG_NET_DSA_TAG_QCA=y
+CONFIG_NET_DSA_QCA8K=m
