@@ -1,56 +1,45 @@
 SUMMARY = "A image for the RDK extender yocto build"
+
 inherit rdk-image
-require recipes-core/images/add-non-root-user-group.inc
 IMAGE_FEATURES_remove = "read-only-rootfs"
 IMAGE_ROOTFS_SIZE = "8192"
+
 IMAGE_INSTALL += " \
-   packagegroup-core-boot \
-   devmem2 \
-   ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "lttng-tools",  d)} \
-   pptp-linux \
-   rp-pppoe  \
-   iputils \
-   btrfs-tools \
-   util-linux-readprofile \
-   wireless-tools \
-   cryptsetup \
-   coreutils \
-   dosfstools \
-   e2fsprogs \
-   iproute2 \
-   libpcap \
-   nfs-utils \
-   openssl \
-   rpcbind \
-   ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "python-core",  d)} \
-   sg3-utils \
-   squashfs-tools \
-   valgrind \
-   testfloat \
-   ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "dhcp-server",  d)} \
-   iptables \
-   rdk-logger \
-   ${SYSTEMD_TOOLS} \
-   php \
-   libmcrypt \
-   bzip2 \
-   ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "", "nmap",  d)} \
-   libpcap \
-   tcpdump \
-   ebtables \
-   bc \
-   libcap \
-   bridge-utils \
-   strace \
-   dropbear \
-   crda \
-   dnsmasq \
-   ntp \
+    bridge-utils \
+    curl \
+    dibbler-client \
+    dibbler-server \
+    dnsmasq \
+    dropbear \
+    glib-2.0 \
+    gnutls \
+    igmpproxy \
+    iptables \
+    libnl \
+    log4c \
+    openssl \
+    popt \
+    zlib \
+    libsyswrapper \
+    ${@bb.utils.contains("DISTRO_FEATURES", "safec", "safec", "" , d)} \
+    rbus \
+    ccsp-common-library \
+    utopia \
+    ccsp-common-startup \
+    ccsp-cr \
+    ccsp-dmcli \
+    ccsp-psm \
+    ccsp-tr069-pa \
+    sysint-broadband \
+    hal-platform \
+    hal-vlan \
+    hal-wifi \
+    breakpad-wrapper \
+    rdk-logger \
 "
-SYSTEMD_TOOLS = "systemd-analyze systemd-bootchart"
-# systemd-bootchart doesn't currently build with musl libc
-SYSTEMD_TOOLS_remove_libc-musl = "systemd-bootchart"
+
 do_rootfs[nostamp] = "1"
+
 #Workaround to add device.properties
 add_device_properties_file() {
     touch ${IMAGE_ROOTFS}/etc/device.properties
