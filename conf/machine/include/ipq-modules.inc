@@ -6,6 +6,9 @@ module_autoload_dwc3 = "usbcore usb-common dwc3 phy-qca-baldur phy-qca-uniphy dw
 KERNEL_MODULE_AUTOLOAD += "usb-storage"
 module_autoload_usb-storage = "usb-storage sd_mod scsi_mod"
 
+KERNEL_MODULE_AUTOLOAD += "phy-qcom-m31"
+module_autoload_phy-qcom-m31 = "phy-qcom-m31"
+
 KERNEL_MODULE_AUTOLOAD += "fat"
 module_autoload_fat = "fat vfat msdos nls_base nls_cp437 nls_iso8859-1"
 
