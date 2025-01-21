@@ -36,6 +36,8 @@ IMAGE_INSTALL += " \
     hal-wifi \
     breakpad-wrapper \
     rdk-logger \
+    rdk-extender \
+    ccsp-misc \
 "
 
 do_rootfs[nostamp] = "1"
