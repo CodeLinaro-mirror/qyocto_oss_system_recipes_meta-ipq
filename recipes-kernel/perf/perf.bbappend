@@ -4,6 +4,8 @@ RDEPENDS:${PN}:remove = "elfutils"
 # DEPENDS_${PN}_append = "elfutils"
 DEPENDS:append = " elfutils "
 
+PACKAGECONFIG:remove = "scripting"
+
 EXTRA_OEMAKE = '\
     -C ${S}/tools/perf \
     O=${B} \
