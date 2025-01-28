@@ -28,10 +28,9 @@ QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-n
 
 QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss-ppe-gretap qca-nss-ppe-vxlanmgr"
 
-NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl qca-nss-flowmgr \
-	    qca-nss-dp \
-	    qca-nss-ecm \
-	    "
+QCA_NSS_SAP = "qca-nsm-app qca-nsm-lib qca-sal-qos qca-sal-qos-test qca-sal-rule qca-sal-rule-test"
+
+NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm ${QCA_NSS_SAP} udp-clf"
 
 IPQ95XX_NSS_PKGS += "qca-nss-fw-eip-al"
 
