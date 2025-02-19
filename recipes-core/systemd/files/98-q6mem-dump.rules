@@ -1,1 +1,1 @@
-SUBSYSTEM=="dump_q6v5",ENV{ACTION}=="add", RUN+="/bin/sh /lib/wifi/00-q6dump"
+SUBSYSTEM=="devcoredump",ENV{ACTION}=="add", RUN+="/bin/sh /lib/wifi/00-q6dump"
