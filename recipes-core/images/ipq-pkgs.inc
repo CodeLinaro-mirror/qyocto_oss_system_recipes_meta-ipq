@@ -30,7 +30,7 @@ QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss
 
 QCA_NSS_SAP = "qca-nsm-app qca-nsm-lib qca-sal-qos qca-sal-qos-test qca-sal-rule qca-sal-rule-test"
 
-NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm ${QCA_NSS_SAP} udp-clf"
+NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm ${QCA_NSS_SAP} udp-clf qca-nss-nsm qca-nss-fls "
 
 IPQ95XX_NSS_PKGS += "qca-nss-fw-eip-al"
 
@@ -67,7 +67,7 @@ FWA_PKGS = " "
 AI_WASM_PKG = "wasm-container-interfaces wasm-container-apis fd"
 AI_PKG = "${AI_WASM_PKG} snpe winai-sdk winai-sample-app"
 
-TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} ${AI_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient"
+TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} ${AI_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient ifli"
 
 #QYOCTO_TEST_PKGS = "perf stress-ng"
 QYOCTO_TEST_PKGS = " dosfstools ntfs-3g iozone3 lrzsz i2c-tools gptfdisk iperf samba tcpdump pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
