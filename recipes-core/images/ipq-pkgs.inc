@@ -54,7 +54,7 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-daemon qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt qti-wifi-location"
 
-WIFI_PKGS = "qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss qca-hapd-supp qca-hapd-supp-macsec wififw-mount qca-wifi-files wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm wlan-iw qca-cnss-daemon qca-wifi-plugins qca-athdiag qca-icm qca-athssd qca-rsrcmgr"
+WIFI_PKGS = "qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss qca-hapd-supp qca-hapd-supp-macsec wififw-mount qca-wifi-files wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm wlan-iw qca-cnss-daemon qca-wifi-plugins qca-athdiag qca-icm qca-athssd"
 
 MCS_PKGS = "qca-mcs-lkm"
 # "qca-mcs-app" is cnss dependent
@@ -67,7 +67,7 @@ FWA_PKGS = " "
 AI_WASM_PKG = "wasm-container-interfaces wasm-container-apis fd"
 AI_PKG = "${AI_WASM_PKG} snpe winai-sdk winai-sample-app"
 
-TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} ${AI_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient ifli"
+TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient"
 
 #QYOCTO_TEST_PKGS = "perf stress-ng"
 QYOCTO_TEST_PKGS = " dosfstools ntfs-3g iozone3 lrzsz i2c-tools gptfdisk iperf samba tcpdump pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
