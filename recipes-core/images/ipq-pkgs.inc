@@ -6,14 +6,14 @@ include recipes-core/images/ipq-images.inc
 IMAGE_FEATURES += "package-management"
 
 QYOCTO_PKGS = " libnl dropbear bridge-utils lua5.1 "
-SYSUPGRADE_ipq95xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE_ipq95xx = "u-boot-2016-env sysupgrade "
+SYSUPGRADE:ipq95xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE:ipq95xx = "u-boot-2016-env sysupgrade "
 
-SYSUPGRADE_ipq53xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE_ipq53xx = "u-boot-2016-env sysupgrade "
+SYSUPGRADE:ipq53xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE:ipq53xx = "u-boot-2016-env sysupgrade "
 
-SYSUPGRADE_ipq54xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE_ipq54xx = "u-boot-2016-env sysupgrade "
+SYSUPGRADE:ipq54xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE:ipq54xx = "u-boot-2016-env sysupgrade "
 
 FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv  util-ubus gpon-server"
 

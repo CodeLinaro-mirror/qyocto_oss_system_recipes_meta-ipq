@@ -9,14 +9,13 @@ IMAGE_INSTALL += " \
 	${IPQ_BASE_PKGS} \
 	${QYOCTO_PKGS} \
 	${UTILS} \
-	${QCA_PHY_PKGS} \
-	${SSDK_NOHNAT_PKGS} \
 	"
 
 #EXTRA_IMAGEDEPENDS += " \
 #		${QYOCTO_TEST_PKGS} \
 #		"
 
+IMAGE_INSTALL += "util-linux"
 
 IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
 
