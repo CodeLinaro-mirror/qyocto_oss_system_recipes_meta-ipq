@@ -59,7 +59,7 @@ WIFI_PKGS = "qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss qca-hapd-supp qca-h
 MCS_PKGS = "qca-mcs-lkm"
 # "qca-mcs-app" is cnss dependent
 
-WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl"
+WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl libbsd"
 
 #FWA_PKGS = "rmnetctl qdl kickstart"
 FWA_PKGS = " "
