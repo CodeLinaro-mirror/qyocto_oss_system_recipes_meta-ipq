@@ -13,6 +13,13 @@ ITB_IMAGE_NAME_ipq53xx_64   = "fit-ipq53xx-ap.mixx.itb"
 ITB_IMAGE_NAME_ipq54xx   = "fit-ipq54xx-ap.maxx.itb"
 ITB_IMAGE_NAME_ipq54xx_64   = "fit-ipq54xx-ap.maxx.itb"
 
+DEPENDS += " padjffs2-native "
+IMAGE_POSTPROCESS_COMMAND += "add_deadcode_rootfs ;"
+
+add_deadcode_rootfs() {
+   ${DEPLOY_DIR_IMAGE}/padjffs2 ${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.squashfs-xz 4 8 16 64 128 256
+}
+
 UBINIZE_CFG              = "${DEPLOY_DIR_IMAGE}/ubinize-${MACHINE}.cfg"
 
 IMAGE_PREPROCESS_COMMAND += "create_ipq_ubi_img;"
