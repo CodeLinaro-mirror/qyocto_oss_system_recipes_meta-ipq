@@ -26,15 +26,30 @@ UBOOT_MACHINE:ipq54xx_64 = "ipq5424_nand \
 	ipq5424_mmc \
 	ipq5424_norplusmmc \
 "
+UBOOT_MACHINE:ipq54xx = "ipq5424_nand32 \
+	ipq5424_norplusnand32 \
+	ipq5424_mmc32 \
+	ipq5424_norplusmmc32 \
+"
 UBOOT_MACHINE:ipq53xx_64 = "ipq5332_nand \
 	ipq5332_norplusnand \
 	ipq5332_mmc \
 	ipq5332_norplusmmc \
 "
+UBOOT_MACHINE:ipq53xx = "ipq5332_nand32 \
+	ipq5332_norplusnand32 \
+	ipq5332_mmc32 \
+	ipq5332_norplusmmc32 \
+"
 UBOOT_MACHINE:ipq95xx_64 = "ipq9574_nand \
 	ipq9574_norplusnand \
 	ipq9574_mmc \
 	ipq9574_norplusmmc \
+"
+UBOOT_MACHINE:ipq95xx = "ipq9574_nand32 \
+	ipq9574_norplusnand32 \
+	ipq9574_mmc32 \
+	ipq9574_norplusmmc32 \
 "
 UBOOT_MAKE_TARGET = "all"
 

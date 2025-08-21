@@ -131,6 +131,8 @@ do_install:append() {
         install -d ${D}/boot
         make dtbs || true
         install -m 0644 ${S}/arch/${KARCH}/boot/dts/${DTB_PATH}/*.dtb ${D}/boot || true
+	mkdir -p ${B}/arch/${KARCH}/boot/dts/${DTB_PATH}
+	cp -rf ${B}/arch/${KARCH}/boot/dts/*dtb ${B}/arch/${KARCH}/boot/dts/${DTB_PATH}/
 }
 
 PACKAGES =+ "kernel-headers ${PN}"
