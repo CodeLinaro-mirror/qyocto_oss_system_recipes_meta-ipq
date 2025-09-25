@@ -2,7 +2,8 @@ LICENSE = "ISC"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://ipq-power-save.sh \
-	file://cold_boot.sh "
+	file://cold_boot.sh \
+	file://wifi_load.sh "
 
 RDEPENDS:${PN}:remove = "grep"
 
@@ -13,6 +14,8 @@ do_install:append() {
 	install -d ${D}/sbin
 	cp ${D}/usr/bin/on_ac_power ${D}/sbin/
 	rm -rf ${D}/usr/lib/pm-utils/power.d/
+	install -d ${D}/usr/sbin
+	cp ${WORKDIR}/wifi_load.sh ${D}/usr/sbin
 }
 
 FILES:${PN} += "${sysconfdir}/*"
