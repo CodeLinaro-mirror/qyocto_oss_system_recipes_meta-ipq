@@ -879,15 +879,7 @@ ipq9574_ac_power()
 	/etc/utopia/service.d/service_lan.sh lan-start
 
 # Wifi Power-up Sequence
-	if [ -f /lib/modules/$(uname -r)/ath11k.ko ]; then
-		modprobe ath11k
-		modprobe ath11k_ahb
-		modprobe ath11k_pci
-		sleep 2
-		/etc/utopia/service.d/service_wlan.sh wlan-start
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_false
-	fi
+	wifi_load.sh load
 
 # SD/MMC Power-UP sequence
 	local emmcblock="$(find_mmc_part "rootfs")"
@@ -909,16 +901,7 @@ ipq9574_battery_power()
 	echo "Entering Battery Mode..."
 
 # Wifi Power-down Sequence
-	lsmod | grep ath11k > /dev/null
-	if [ $? -eq 0 ]; then
-		/etc/utopia/service.d/service_wlan.sh wlan-stop
-		sleep 2
-		rmmod ath11k_pci
-		rmmod ath11k_ahb
-		rmmod ath11k
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_true
-	fi
+	wifi_load.sh unload
 
 # PCIe Power-Down Sequence
 
@@ -1090,13 +1073,7 @@ ipq5332_ac_power()
 	/etc/utopia/service.d/service_lan.sh lan-start
 
 # Wifi Power-up Sequence
-	if [ -f /lib/modules/$(uname -r)/ath12k.ko ]; then
-		insmod ath12k
-		sleep 2
-		/etc/utopia/service.d/service_wlan.sh wlan-start
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_false
-	fi
+	wifi_load.sh load
 
 # SD/MMC Power-UP sequence
 	local emmcblock="$(find_mmc_part "rootfs")"
@@ -1118,14 +1095,7 @@ ipq5332_battery_power()
 	echo "Entering Battery Mode..."
 
 # Wifi Power-down Sequence
-	lsmod | grep ath12k > /dev/null
-	if [ $? -eq 0 ]; then
-		/etc/utopia/service.d/service_wlan.sh wlan-stop
-		sleep 2
-		rmmod ath12k
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_true
-	fi
+	wifi_load.sh unload
 
 # PCIe Power-Down Sequence
 	if [ -f /sys/bus/pci/rcremove ]
@@ -1229,13 +1199,7 @@ ipq5424_ac_power()
 	/etc/utopia/service.d/service_lan.sh lan-start
 
 # Wifi Power-up Sequence
-	if [ -f /lib/modules/$(uname -r)/ath12k.ko ]; then
-		insmod ath12k
-		sleep 2
-		/etc/utopia/service.d/service_wlan.sh wlan-start
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_false
-	fi
+	wifi_load.sh load
 
 # SD/MMC Power-UP sequence
 	local emmcblock="$(find_mmc_part "rootfs")"
@@ -1257,14 +1221,7 @@ ipq5424_battery_power()
 	echo "Entering Battery Mode..."
 
 # Wifi Power-down Sequence
-	lsmod | grep ath12k > /dev/null
-	if [ $? -eq 0 ]; then
-		/etc/utopia/service.d/service_wlan.sh wlan-stop
-		sleep 2
-		rmmod ath12k
-	else
-		/usr/bin/rdk_qca_wifi.sh powersave_true
-	fi
+	wifi_load.sh unload
 
 # PCIe Power-Down Sequence
 	if [ -f /sys/bus/pci/rcremove ]
