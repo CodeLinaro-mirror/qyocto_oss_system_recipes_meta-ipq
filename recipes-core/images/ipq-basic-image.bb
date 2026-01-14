@@ -7,18 +7,5 @@ include recipes-core/images/ipq-pkgs.inc
 IMAGE_INSTALL += " \
 	kernel-modules \
 	${IPQ_BASE_PKGS} \
-	${QYOCTO_PKGS} \
 	${UTILS} \
 	"
-
-#EXTRA_IMAGEDEPENDS += " \
-#		${QYOCTO_TEST_PKGS} \
-#		"
-
-IMAGE_INSTALL += "util-linux"
-
-IPQ_BASE_PKGS:remove = " ${SYSUPGRADE} datarmnet modemmanager libnghttp2 wolfssl "
-
-UTILS:remove = " rp-pppoe pdt "
-
-NETWORK_PKGS:remove = " dhcp-server iw ntp "
