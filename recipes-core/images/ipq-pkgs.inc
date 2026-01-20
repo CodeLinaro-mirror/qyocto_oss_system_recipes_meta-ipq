@@ -15,6 +15,12 @@ SYSUPGRADE:ipq53xx = "u-boot-2025-env sysupgrade "
 SYSUPGRADE:ipq54xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE:ipq54xx = "u-boot-2025-env sysupgrade "
 
+SYSUPGRADE:ipq52xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE:ipq52xx = "u-boot-2025-env sysupgrade "
+
+SYSUPGRADE:ipq96xx_64 = "sysupgrade-helper sysupgrade"
+SYSUPGRADE:ipq96xx = "u-boot-2025-env sysupgrade "
+
 FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv  util-ubus gpon-server"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"

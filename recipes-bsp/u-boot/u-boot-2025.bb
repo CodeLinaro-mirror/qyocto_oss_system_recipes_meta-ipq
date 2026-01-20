@@ -1,4 +1,4 @@
-DESCRIPTION = "U-boot bootloader for IPQ95xx/53xxx/54xx"
+DESCRIPTION = "U-boot bootloader for IPQ95xx/53xxx/54xx/52xx/96xx"
 LICENSE = "GPLv2"
 SECTION = "bootloaders"
 
@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 
 LOCALVERSION ?= "+yocto"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(ipq95xx|ipq95xx_64|ipq53xx_64|ipq53xx|ipq54xx_64|ipq54xx|ipq52xx|ipq52xx_64)"
+COMPATIBLE_MACHINE = "(ipq95xx|ipq95xx_64|ipq53xx_64|ipq53xx|ipq54xx_64|ipq54xx|ipq52xx|ipq52xx_64|ipq96xx_64|ipq96xx)"
 
 SRC_URI = "file://u-boot-2025"
 
@@ -48,15 +48,25 @@ UBOOT_MACHINE:ipq95xx = "ipq9574_nand32 \
 	ipq9574_mmc32 \
 	ipq9574_norplusmmc32 \
 "
-UBOOT_MACHINE:ipq52xx_64 = "ipq5200_nand \
-	ipq5200_norplusnand \
-	ipq5200_mmc \
-	ipq5200_norplusmmc \
+UBOOT_MACHINE:ipq52xx_64 = "ipq5210_nand \
+	ipq5210_norplusnand \
+	ipq5210_mmc \
+	ipq5210_norplusmmc \
 "
-UBOOT_MACHINE:ipq52xx = "ipq5200_nand32 \
-	ipq5200_norplusnand32 \
-	ipq5200_mmc32 \
-	ipq5200_norplusmmc32 \
+UBOOT_MACHINE:ipq52xx = "ipq5210_nand32 \
+	ipq5210_norplusnand32 \
+	ipq5210_mmc32 \
+	ipq5210_norplusmmc32 \
+"
+UBOOT_MACHINE:ipq96xx_64 = "ipq9650_nand \
+	ipq9650_norplusnand \
+	ipq9650_mmc \
+	ipq9650_norplusmmc \
+"
+UBOOT_MACHINE:ipq52xx = "ipq9650_nand32 \
+	ipq9650_norplusnand32 \
+	ipq9650_mmc32 \
+	ipq9650_norplusmmc32 \
 "
 UBOOT_MAKE_TARGET = "all"
 

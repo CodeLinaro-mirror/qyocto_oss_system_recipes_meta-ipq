@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64||ipq53xx||ipq53xx_64|ipq54xx_64|ipq54xx)"
+COMPATIBLE_MACHINE = "(ipq806x|ipq40xx|ipq807x|ipq807x_64|ipq95xx|ipq95xx_64|ipq53xx||ipq53xx_64|ipq54xx_64|ipq54xx|ipq96xx_64|ipq96xx|ipq52xx_64|ipq52xx)"
 
 KMACHINE = "${MACHINE}"
 
@@ -22,6 +22,10 @@ FIT_IMAGE_NAME_ipq53xx = "ipq53xx-ap.mixx.itb"
 FIT_IMAGE_NAME_ipq53xx_64 = "ipq53xx-ap.mixx.itb"
 FIT_IMAGE_NAME_ipq54xx = "ipq54xx-ap.maxx.itb"
 FIT_IMAGE_NAME_ipq54xx_64 = "ipq54xx-ap.maxx.itb"
+FIT_IMAGE_NAME_ipq96xx = "ipq96xx-ap.jhxx.itb"
+FIT_IMAGE_NAME_ipq96xx_64 = "ipq96xx-ap.jhxx.itb"
+FIT_IMAGE_NAME_ipq52xx = "ipq52xx-ap.hmxx.itb"
+FIT_IMAGE_NAME_ipq52xx_64 = "ipq52xx-ap.hmxx.itb"
 SOC_TYPE = "${@d.getVar('SOC_FAMILY', True).split(':')[1]}"
 
 mk_fit_images() {

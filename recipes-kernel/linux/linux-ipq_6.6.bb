@@ -13,6 +13,10 @@ SRC_URI = "file://kernel \
 	   file://ipq95xx_64-default \
 	   file://ipq54xx-default \
 	   file://ipq54xx_64-default \
+	   file://ipq52xx-default \
+	   file://ipq52xx_64-default \
+	   file://ipq96xx-default \
+	   file://ipq96xx_64-default \
 	   file://ipq53xx-default \
 	   file://ipq53xx_64-default \
 	   file://ipq807x_64-default \
@@ -34,7 +38,7 @@ EXTRA_OEMAKE += " \
 #	"
 
 #  MAKEOPTS += __KERNEL__=1
-COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64|ipq53xx|ipq53xx_64|ipq54xx_64|ipq54xx)"
+COMPATIBLE_MACHINE = "(ipq807x|ipq807x_64|ipq95xx|ipq95xx_64|ipq53xx|ipq53xx_64|ipq54xx_64|ipq54xx|ipq96xx_64|ipq96xx|ipq52xx_64|ipq52xx)"
 KERNEL_IMAGETYPE ?= "Image"
 
 do_install:prepend() {
