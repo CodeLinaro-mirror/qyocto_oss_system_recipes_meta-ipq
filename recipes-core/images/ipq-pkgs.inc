@@ -36,7 +36,7 @@ QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss
 
 QCA_NSS_SAP = "qca-nsm-app qca-nsm-lib qca-sal-qos qca-sal-qos-test qca-sal-rule qca-sal-rule-test"
 
-NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-nss-eip qca-ovsmgr qca-nss-dscpstats qca-nss-userspace-oss qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm ${QCA_NSS_SAP} udp-clf ecm-wifi-plugin qca-nss-nsm qca-nss-fls libnftnl nftables qca-mmap-telemetry qca-sxc-drv"
+NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-ovsmgr qca-nss-dscpstats qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm  udp-clf  qca-nss-nsm qca-nss-fls libnftnl nftables"
 
 IPQ95XX_NSS_PKGS += "qca-nss-fw-eip-al"
 
@@ -60,7 +60,9 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-daemon qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt qti-wifi-location"
 
-WIFI_PKGS = "qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss qca-hapd-supp qca-hapd-supp-macsec wififw-mount qca-wifi-files wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm wlan-iw qca-cnss-daemon qca-wifi-plugins qca-athdiag qca-icm qca-athssd"
+#WIFI_PKGS_OLD = "qca-cfg80211 qca-cfg80211tool qca-wifi qca-cnss qca-hapd-supp qca-hapd-supp-macsec wififw-mount qca-wifi-files wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm wlan-iw qca-cnss-daemon qca-wifi-plugins qca-athdiag qca-icm qca-athssd"
+
+WIFI_PKGS = "qca-cfg80211 qca-cfg80211tool qca-cnss qca-hapd-supp qca-hapd-supp-macsec wififw-mount wireless-tools hostapd-scripts wpasupplicant-scripts ath6kl-utils qca-ftm athtestcmd myftm wlan-iw qca-cnss-daemon  qca-athdiag qca-icm qca-athssd"
 
 MCS_PKGS = "qca-mcs-lkm"
 # "qca-mcs-app" is cnss dependent
