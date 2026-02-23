@@ -12,10 +12,10 @@ do_install:append() {
 	install -m 0755 ${WORKDIR}/ipq-power-save.sh ${D}/etc/pm/power.d/
 	install -m 0755 ${WORKDIR}/cold_boot.sh ${D}/etc/pm/power.d/
 	install -d ${D}/sbin
-	cp ${D}/usr/bin/on_ac_power ${D}/sbin/
+	install -m 0755 ${D}/usr/bin/on_ac_power ${D}/sbin/
 	rm -rf ${D}/usr/lib/pm-utils/power.d/
 	install -d ${D}/usr/sbin
-	cp ${WORKDIR}/wifi_load.sh ${D}/usr/sbin
+	install -m 0755 ${WORKDIR}/wifi_load.sh ${D}/usr/sbin
 }
 
 FILES:${PN} += "${sysconfdir}/*"
