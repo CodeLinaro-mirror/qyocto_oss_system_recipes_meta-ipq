@@ -28,7 +28,8 @@ IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay qca-qmi-fram
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
-NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables mcproxy nat46 ntp qca-mcs-lkm qca-nss-netfn-tcpst libnl-tcpst nss-tcp-st-cli linuxptp"
+
+NETWORK_PKGS = "ethtool iproute2 iproute2-tc iptables mcproxy nat46 ntp qca-nss-netfn-tcpst libnl-tcpst nss-tcp-st-cli linuxptp"
 
 QCA_NSS_PPE = "qca-nss-ppe qca-nss-ppe-vp qca-nss-ppe-ds qca-nss-ppe-qdisc qca-nss-ppe-l2tp qca-nss-ppe-netlink qca-nss-ppe-rule qca-nss-ppe-client"
 
@@ -66,7 +67,8 @@ QCA_ECM = "qca-nss-ecm"
 
 WIFI_PKGS = ""
 
-MCS_PKGS = "qca-mcs-lkm"
+#MCS_PKGS = "qca-mcs-lkm"
+MCS_PKGS = ""
 # "qca-mcs-app" is cnss dependent
 
 #WIFI_EZMESH_PKGS = "qca-ezmesh qca-whc-repacd qca-wsplcd qca-hyctl libbsd"
