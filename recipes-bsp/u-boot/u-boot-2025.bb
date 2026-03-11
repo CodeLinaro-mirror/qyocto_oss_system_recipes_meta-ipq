@@ -63,7 +63,7 @@ UBOOT_MACHINE:ipq96xx_64 = "ipq9650_nand \
 	ipq9650_mmc \
 	ipq9650_norplusmmc \
 "
-UBOOT_MACHINE:ipq52xx = "ipq9650_nand32 \
+UBOOT_MACHINE:ipq96xx = "ipq9650_nand32 \
 	ipq9650_norplusnand32 \
 	ipq9650_mmc32 \
 	ipq9650_norplusmmc32 \
