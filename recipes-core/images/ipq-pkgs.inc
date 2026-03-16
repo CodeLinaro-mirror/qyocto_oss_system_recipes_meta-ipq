@@ -67,11 +67,11 @@ FWA_PKGS = " "
 AI_WASM_PKG = "wasm-container-interfaces wasm-container-apis fd"
 AI_PKG = "${AI_WASM_PKG} snpe winai-sdk winai-sample-app"
 
-GWAPPS_PKG = "unzip nghttp2 mosquitto libwebsockets wasm-micro-runtime ca-certificates package-manager-agent"
+GWAPPS_PKG = "unzip nghttp2 mosquitto libwebsockets wasm-micro-runtime ca-certificates package-manager-agent wasm-container-interfaces"
 
-#LICENSING_PKG = "softsku-qwin-agent softsku-sdk"
+LICENSING_PKG = "softsku-qwin-agent softsku-sdk"
 
-TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} ${AI_PKG} ${GWAPPS_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient ifli"
+TEST_PKGS = "${FWA_PKGS} ${AFC_PKGS} ${GWAPPS_PKG} ${LICENSING_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade ${WIFI_EZMESH_PKGS} strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient ifli"
 
 #QYOCTO_TEST_PKGS = "perf stress-ng"
 QYOCTO_TEST_PKGS = " dosfstools ntfs-3g iozone3 lrzsz i2c-tools gptfdisk iperf samba tcpdump pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
