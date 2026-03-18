@@ -9,9 +9,8 @@ IMAGE_INSTALL += " \
 	${QYOCTO_PKGS} \
 	${NETWORK_PKGS} \
 	${UTILS} \
+	${WIFI_PKGS} \
 	"
-#${WIFI_PKGS} \
-#Enable once wifi is enabled.
 
 NSS:ipq95xx_64 = "${SSDK_NOHNAT_PKGS} \
 		  ${NSS_PKGS} \
