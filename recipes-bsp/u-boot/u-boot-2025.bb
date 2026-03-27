@@ -13,7 +13,9 @@ LOCALVERSION ?= "+yocto"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(ipq95xx|ipq95xx_64|ipq53xx_64|ipq53xx|ipq54xx_64|ipq54xx|ipq52xx|ipq52xx_64|ipq96xx_64|ipq96xx)"
 
-SRC_URI = "file://u-boot-2025"
+SRC_URI = "file://u-boot-2025 \
+           file://pack_uboot_elf.sh \
+"
 
 S = "${WORKDIR}/u-boot-2025"
 
@@ -153,34 +155,61 @@ do_install() {
 	for config in ${UBOOT_MACHINE}; do
 		# Determine architecture (32/64-bit)
 		case "$config" in
-		*32) ARCH_OBJ="elf32-littlearm" ;;
-		*)   ARCH_OBJ="elf64-littleaarch64" ;;
+		*32)
+			ARCH_OBJ="elf32-littlearm"
+			BASE_PF=$(echo "$config" | cut -c1-5)
+			SUBTARGET="${BASE_PF}xx_32"
+			;;
+		*)
+			ARCH_OBJ="elf64-littleaarch64"
+			SUBTARGET="generic"
+			;;
 		esac
 
-		# Extract TEXT_BASE and TEXT_SIZE from defconfig
-		TEXT_BASE=$(grep "CONFIG_TEXT_BASE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
-		TEXT_SIZE=$(grep "CONFIG_TEXT_SIZE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
+		case "$config" in
+		*spl*)
+			SPL_TEXT_BASE=$(grep "CONFIG_SPL_TEXT_BASE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
+			SPL_TEXT_SIZE=$(grep "CONFIG_SPL_TEXT_SIZE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
 
-		# Generate custom linker script
-		LD_SCRIPT="MEMORY { DDR (rxw) : ORIGIN = ${TEXT_BASE}, LENGTH = ${TEXT_SIZE} } PHDRS { data PT_LOAD FLAGS(5); } ENTRY(_entry) SECTIONS { . = ${TEXT_BASE}; _entry = . ;	.data : { *(.data) . = ALIGN(4);} > DDR :data _end = .; }"
+			LD_SCRIPT="MEMORY { SRAM (rxw) : ORIGIN = ${SPL_TEXT_BASE}, LENGTH = ${SPL_TEXT_SIZE} } PHDRS { ptype PT_LOAD FLAGS(5); } ENTRY(_entry) SECTIONS { . = ${SPL_TEXT_BASE}; _entry = . ; .data : { *(.data) . = ALIGN(4);} > SRAM :ptype _end = .; }"
 
-		echo "${LD_SCRIPT}" > ${WORKDIR}/u-boot-${config}/u-boot-${config}-custom.ld
+			echo "${LD_SCRIPT}" > ${WORKDIR}/u-boot-${config}/u-boot-${config}-custom.ld
 
-		# Convert u-boot.bin to object file
-		${OBJCOPY} -I binary -O ${ARCH_OBJ} --change-addresses ${TEXT_BASE} --set-start ${TEXT_BASE} \
-			${WORKDIR}/u-boot-${config}/u-boot.bin ${WORKDIR}/u-boot-${config}/u-boot.o
+			${OBJCOPY} -I binary -O ${ARCH_OBJ} --change-addresses ${SPL_TEXT_BASE} --set-start ${SPL_TEXT_BASE} \
+				${WORKDIR}/u-boot-${config}/spl/u-boot-spl.bin ${WORKDIR}/u-boot-${config}/spl/u-boot-spl.o
 
-		# Link to create custom ELF
-		${LD} ${WORKDIR}/u-boot-${config}/u-boot.o -T ${WORKDIR}/u-boot-${config}/u-boot-${config}-custom.ld \
-			-o ${D}${bindir}/u-boot-${config}-${PV}-${PR}.elf
+			${LD} ${WORKDIR}/u-boot-${config}/spl/u-boot-spl.o -T ${WORKDIR}/u-boot-${config}/u-boot-${config}-custom.ld \
+				-o ${D}${bindir}/u-boot-${config}-${PV}-${PR}.elf
 
-		# Copy original unstripped/stripped ELF
-		cp ${WORKDIR}/u-boot-${config}/u-boot ${D}${bindir}/u-boot-${config}-${PV}-${PR}-unstripped.elf
-		cp ${WORKDIR}/u-boot-${config}/u-boot ${D}${bindir}/u-boot-${config}-${PV}-${PR}-stripped.elf
-		${STRIP} ${D}${bindir}/u-boot-${config}-${PV}-${PR}-stripped.elf
+			cp ${WORKDIR}/u-boot-${config}/spl/u-boot-spl ${D}${bindir}/u-boot-${config}-${PV}-${PR}-unstripped.elf
+			cp ${WORKDIR}/u-boot-${config}/spl/u-boot-spl ${D}${bindir}/u-boot-${config}-${PV}-${PR}-stripped.elf
+			${STRIP} ${D}${bindir}/u-boot-${config}-${PV}-${PR}-stripped.elf
 
-		# Copy binary image
-		cp ${WORKDIR}/u-boot-${config}/u-boot.bin ${D}${bindir}/${config}-${PV}-${PR}-u-boot.img
+			cp ${WORKDIR}/u-boot-${config}/spl/u-boot-spl.bin ${D}${bindir}/${config}-${PV}-${PR}-u-boot.img
+			;;
+		*)
+			# Extract TEXT_BASE and TEXT_SIZE from defconfig
+			TEXT_BASE=$(grep "CONFIG_TEXT_BASE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
+			TEXT_SIZE=$(grep "CONFIG_TEXT_SIZE" ${WORKDIR}/u-boot-${config}/configs/${config}_defconfig | cut -d'=' -f2)
+
+			PLATFORM=$(echo "$config" | cut -d'_' -f1)
+			VARIANT=$(echo "$config" | cut -d'_' -f2-)
+
+			bash ${WORKDIR}/pack_uboot_elf.sh \
+				"${WORKDIR}/u-boot-${config}" \
+				"${D}${bindir}" \
+				"${PLATFORM}" \
+				"${SUBTARGET}" \
+				"${VARIANT}" \
+				"${TEXT_BASE}" \
+				"${TEXT_SIZE}" \
+				"${ARCH_OBJ}" \
+				"${OBJCOPY}" \
+				"${LD}" \
+				"${STRIP}" \
+				"cp"
+			;;
+		esac
 	done
 }
 
