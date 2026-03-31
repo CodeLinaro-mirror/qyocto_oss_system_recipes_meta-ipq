@@ -59,7 +59,7 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "open-mac80211"
+WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins"
 
 #MCS_PKGS = "qca-mcs-lkm"
 MCS_PKGS = ""
