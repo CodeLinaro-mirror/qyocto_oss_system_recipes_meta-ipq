@@ -37,7 +37,7 @@ QCA_NSS_PPE_TUN = "qca-nss-ppe-tun qca-nss-ppe-tunipip6 qca-nss-ppe-mapt qca-nss
 
 QCA_NSS_SAP = "qca-nsm-app qca-nsm-lib qca-sal-qos qca-sal-qos-test qca-sal-rule qca-sal-rule-test"
 
-NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-ovsmgr qca-nss-dscpstats qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm  udp-clf  qca-nss-nsm qca-nss-fls libnftnl nftables qca-nss-debug qca-nss-wifi-plugin"
+NSS_PKGS += "${QCA_NSS_PPE} ${QCA_NSS_PPE_TUN} qca-nss-sfe qca-ovsmgr qca-nss-dscpstats qca-nss-libppenl qca-nss-flowmgr qca-nss-dp qca-nss-ecm ${QCA_NSS_SAP} udp-clf  qca-nss-nsm qca-nss-fls libnftnl nftables qca-nss-debug qca-mmap-telemetry qca-sxc-drv qca-nss-wifi-plugin"
 
 IPQ95XX_NSS_PKGS += "qca-nss-fw-eip-al"
 
