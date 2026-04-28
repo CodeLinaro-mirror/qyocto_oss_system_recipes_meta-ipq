@@ -61,7 +61,7 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry"
+WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry qca-athdiag"
 
 #MCS_PKGS = "qca-mcs-lkm"
 MCS_PKGS = ""
