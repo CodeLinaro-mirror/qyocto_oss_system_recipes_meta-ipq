@@ -24,7 +24,7 @@ SYSUPGRADE:ipq96xx = "u-boot-2025-env sysupgrade "
 FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv  util-ubus gpon-server"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump"
+IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
@@ -73,10 +73,10 @@ FWA_PKGS = " "
 AI_WASM_PKG = "wasm-container-interfaces wasm-container-apis fd"
 AI_PKG = "${AI_WASM_PKG} snpe winai-sdk winai-sample-app"
 
-#LICENSING_PKG = "softsku-qwin-agent softsku-sdk"
+LICENSING_PKG = "softsku-qwin-agent softsku-sdk"
 GWAPPS_PKG = "unzip nghttp2 mosquitto libwebsockets wasm-micro-runtime ca-certificates package-manager-agent wasm-container-interfaces"
 
-TEST_PKGS = "${FWA_PKGS} ${GWAPPS_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient "
+TEST_PKGS = "${FWA_PKGS} ${GWAPPS_PKG} ${LICENSING_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient "
 
 #QYOCTO_TEST_PKGS = "perf stress-ng"
 QYOCTO_TEST_PKGS = " dosfstools ntfs-3g iozone3 lrzsz i2c-tools gptfdisk iperf samba tcpdump pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
