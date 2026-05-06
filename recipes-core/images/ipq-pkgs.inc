@@ -21,10 +21,12 @@ SYSUPGRADE:ipq52xx = "u-boot-2025-env sysupgrade "
 SYSUPGRADE:ipq96xx_64 = "sysupgrade-helper sysupgrade"
 SYSUPGRADE:ipq96xx = "u-boot-2025-env sysupgrade "
 
-FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv  util-ubus gpon-server"
+FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv gpon-server"
+FONTANA_PKG:ipq52xx = "gpon-server nss-pon-drv omci-pon"
+FONTANA_PKG:ipq52xx_64 = "gpon-server nss-pon-drv omci-pon"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs"
+IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
@@ -59,7 +61,7 @@ SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
 
-WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry"
+WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry qca-athdiag ath6kl-utils qca-ftm athtestcmd myftm"
 
 #MCS_PKGS = "qca-mcs-lkm"
 MCS_PKGS = ""
