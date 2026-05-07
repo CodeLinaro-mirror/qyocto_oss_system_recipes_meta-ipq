@@ -49,7 +49,7 @@ RFS_PKGS = "qca-rfs"
 
 QCA_EDMA = "qca-edma"
 
-SSDK_NOHNAT_PKGS ="qca-ssdk-nohnat qca-ssdk-shell qca-macsec qca8k"
+SSDK_NOHNAT_PKGS ="qca-ssdk-nohnat qca-ssdk-shell qca-macsec qca8k qce2k"
 
 QCA_PHY_PKGS = "qca-nss-phy aqr-phy"
 
