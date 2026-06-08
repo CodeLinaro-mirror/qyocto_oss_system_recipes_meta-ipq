@@ -1,0 +1,18 @@
+[Unit]
+Description=Remote Processor Firmware Mount for IPQ9650
+Documentation=https://github.com/qualcomm/fastrpc
+# Must run before cdsprpcd so CDSP firmware is available when the daemon starts
+Before=cdsprpcd.service
+# Run after overlay filesystem is set up (makes root writable) and block devices are ready
+DefaultDependencies=no
+After=local-fs.target systemd-udev-settle.service initoverlay.service
+Wants=systemd-udev-settle.service initoverlay.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/rproc_fw_mount.sh start
+ExecStop=/usr/sbin/rproc_fw_mount.sh stop
+
+[Install]
+WantedBy=multi-user.target
