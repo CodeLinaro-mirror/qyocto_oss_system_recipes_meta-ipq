@@ -10,6 +10,7 @@ do_install:append() {
 	install -d ${D}/lib/udev/rules.d/
 	install -m 0755 ${WORKDIR}/95-gpio-buttons.rules ${D}/lib/udev/rules.d/
 	install -m 0755 ${WORKDIR}/98-q6mem-dump.rules ${D}/lib/udev/rules.d/
+	sed -i 's/log_martians = 1/log_martians = 0/g' ${D}${sysconfdir}/sysctl.d/traffic-filter.conf
 }
 
 FILES:${PN} += " \
