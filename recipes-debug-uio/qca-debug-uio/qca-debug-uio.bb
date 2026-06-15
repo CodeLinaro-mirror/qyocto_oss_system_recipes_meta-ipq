@@ -45,6 +45,7 @@ do_install() {
 	install -m 0644 ${S}/debug_uio${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/${PN}
 	install -d ${D}${includedir}/qca-debug-uio
 	install -m 0644 ${S}/exports/debug_uio_public.h ${D}${includedir}/qca-debug-uio/
+	install -m 0644 ${S}/Module.symvers ${D}${includedir}/qca-debug-uio/Module.symvers
 }
 
 KERNEL_MODULE_AUTOLOAD += "debug_uio"
