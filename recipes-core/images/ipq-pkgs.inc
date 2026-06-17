@@ -26,8 +26,8 @@ FONTANA_PKG:ipq52xx = "gpon-server nss-pon-drv omci-pon"
 FONTANA_PKG:ipq52xx_64 = "gpon-server nss-pon-drv omci-pon"
 
 RPROC_FW_MOUNT = ""
-RPROC_FW_MOUNT:ipq96xx_64 = "rproc-fw-mount"
-RPROC_FW_MOUNT:ipq96xx = "rproc-fw-mount"
+RPROC_FW_MOUNT:ipq96xx_64 = "rproc-fw-mount qca-rfs-tftp"
+RPROC_FW_MOUNT:ipq96xx = "rproc-fw-mount qca-rfs-tftp"
 
 # FastRPC: CDSP remote procedure call daemon + library (ipq96xx only - has CDSP)
 FASTRPC_PKGS = ""
