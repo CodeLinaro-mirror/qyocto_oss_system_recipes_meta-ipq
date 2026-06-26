@@ -18,7 +18,7 @@ DEPENDS = "virtual/kernel"
 S = "${WORKDIR}/qca-debug-uio/"
 
 EXTRA_CFLAGS += " \
-		-Werror \
+                -Wno-error \
 		-Wall \
 		-fno-stack-protector \
 		-I${S} \
