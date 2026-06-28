@@ -35,7 +35,7 @@ FASTRPC_PKGS:ipq96xx_64 = "fastrpc"
 FASTRPC_PKGS:ipq96xx = "fastrpc"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio memory-dashboard ${RPROC_FW_MOUNT} ${FASTRPC_PKGS}"
+IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio ${RPROC_FW_MOUNT} ${FASTRPC_PKGS}"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
