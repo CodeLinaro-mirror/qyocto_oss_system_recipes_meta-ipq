@@ -318,8 +318,35 @@ platform=$(cat /proc/device-tree/model 2>/dev/null | tr -d '\0' | grep -o "IPQ[^
 case "$1" in
     start)
         if echo "$platform" | grep -qiE "IPQ96"; then
-            mount_cdsp_fw "IPQ9650"
             mount_prime_fw "IPQ9650"
+
+            mount_cdsp_fw "IPQ9650"
+            if [ $? -eq 0 ]; then
+                # Start CDSP remoteproc only on 64-bit (aarch64) builds
+                build_arch=$(grep -o "aarch64\|arm" /proc/version | head -1)
+                if [ "$build_arch" = "aarch64" ]; then
+                    # Find the remoteproc whose firmware is cdsp.mbn
+                    cdsp_rproc=""
+                    for rproc in /sys/class/remoteproc/remoteproc*; do
+                        fw=$(cat $rproc/firmware 2>/dev/null)
+                        if [ "$fw" = "cdsp.mbn" ]; then
+                            cdsp_rproc=$(basename $rproc)
+                            break
+                        fi
+                    done
+
+                    if [ -n "$cdsp_rproc" ]; then
+                        echo "Booting CDSP" > /dev/console 2>&1
+                        echo start > /sys/class/remoteproc/$cdsp_rproc/state
+                        echo "Starting RFS for CDSP" > /dev/console 2>&1
+                        tftp_server &
+                    else
+                        echo "CDSP remoteproc not found in /sys/class/remoteproc/" > /dev/console 2>&1
+                    fi
+                fi
+            else
+                echo "Skipping CDSP boot due to mount failure" > /dev/console 2>&1
+            fi
         fi
         ;;
     stop)
