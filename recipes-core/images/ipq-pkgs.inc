@@ -36,13 +36,27 @@ OPTEE_CLIENT_PKGS:ipq96xx = "optee-client"
 OPTEE_CLIENT_PKGS:ipq52xx_64 = "optee-client"
 OPTEE_CLIENT_PKGS:ipq52xx = "optee-client"
 
+# qca-thermald is used on all targets except ipq52xx and ipq96xx which use qca-thermal-engine
+THERMALD_PKG = "qca-thermald"
+THERMALD_PKG:ipq52xx_64 = ""
+THERMALD_PKG:ipq52xx = ""
+THERMALD_PKG:ipq96xx_64 = ""
+THERMALD_PKG:ipq96xx = ""
+
+# Thermal Engine: ipq52xx and ipq96xx (replaces qca-thermald on these targets)
+THERMAL_ENGINE_PKG = ""
+THERMAL_ENGINE_PKG:ipq52xx_64 = "qca-thermal-engine"
+THERMAL_ENGINE_PKG:ipq52xx = "qca-thermal-engine"
+THERMAL_ENGINE_PKG:ipq96xx_64 = "qca-thermal-engine"
+THERMAL_ENGINE_PKG:ipq96xx = "qca-thermal-engine"
+
 # FastRPC: CDSP remote procedure call daemon + library (ipq96xx only - has CDSP)
 FASTRPC_PKGS = ""
 FASTRPC_PKGS:ipq96xx_64 = "fastrpc"
 FASTRPC_PKGS:ipq96xx = "fastrpc"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio memory-dashboard ${RPROC_FW_MOUNT} ${FASTRPC_PKGS} ${OPTEE_CLIENT_PKGS} mem-profile"
+IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router ${THERMALD_PKG} ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio memory-dashboard ${RPROC_FW_MOUNT} ${FASTRPC_PKGS} ${OPTEE_CLIENT_PKGS} mem-profile"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
@@ -96,7 +110,7 @@ AI_PKG = "${AI_WASM_PKG} snpe winai-sdk winai-sample-app"
 LICENSING_PKG = "softsku-qwin-agent softsku-sdk"
 GWAPPS_PKG = "unzip nghttp2 mosquitto libwebsockets wasm-micro-runtime ca-certificates package-manager-agent wasm-container-interfaces qca-net-standby"
 
-TEST_PKGS = "${FWA_PKGS} ${GWAPPS_PKG} ${LICENSING_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient "
+TEST_PKGS = "${FWA_PKGS} ${GWAPPS_PKG} ${LICENSING_PKG} iozone3 dosfstools lrzsz i2c-tools gptfdisk iperf samba ntfs-3g ebtables iperf3 pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lvm2 lua5.1 valgrind openssh i2c-rw-utils security-assurance-test lmbench cryptsetup squashfs4 qca-wlanfw-upgrade strace kexec-tools file rng-tools modemmanager tcpdump perf gpsd gpsclient ${THERMAL_ENGINE_PKG}"
 
 #QYOCTO_TEST_PKGS = "perf stress-ng"
 QYOCTO_TEST_PKGS = " dosfstools ntfs-3g iozone3 lrzsz i2c-tools gptfdisk iperf samba tcpdump pciutils minicom util-linux gpio-debug clk-debug shadow coreutils lua5.1 valgrind openssh ltp squashfs4 qca-wlanfw-upgrade "
