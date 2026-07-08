@@ -12,3 +12,4 @@ RDEPENDS:${PN} = " \
 	initoverlay \
 	ipq-boot \
 	"
+RDEPENDS:${PN}:append:echo = " qca-wifi-nss-plugins"
