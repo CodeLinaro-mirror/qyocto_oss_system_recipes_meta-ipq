@@ -34,7 +34,7 @@ do_compile() {
 	unset LDFLAGS
 	make -C "${STAGING_KERNEL_BUILDDIR}" \
 	CROSS_COMPILE="${TARGET_PREFIX}" \
-	ARCH="${KARCH}" \
+	ARCH="${ARCH}" \
 	M="${S}" \
 	EXTRA_CFLAGS="${EXTRA_CFLAGS}" \
 	modules

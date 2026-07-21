@@ -1,0 +1,17 @@
+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: BSD-2-Clause
+
+[Unit]
+Description=TEE Supplicant (OP-TEE Normal World Client)
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/tee-supplicant
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target
