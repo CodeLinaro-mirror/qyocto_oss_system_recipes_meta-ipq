@@ -29,13 +29,20 @@ RPROC_FW_MOUNT = ""
 RPROC_FW_MOUNT:ipq96xx_64 = "rproc-fw-mount qca-rfs-tftp"
 RPROC_FW_MOUNT:ipq96xx = "rproc-fw-mount qca-rfs-tftp"
 
+# OP-TEE client (tee-supplicant) for platforms with OP-TEE secure world support
+OPTEE_CLIENT_PKGS = ""
+OPTEE_CLIENT_PKGS:ipq96xx_64 = "optee-client"
+OPTEE_CLIENT_PKGS:ipq96xx = "optee-client"
+OPTEE_CLIENT_PKGS:ipq52xx_64 = "optee-client"
+OPTEE_CLIENT_PKGS:ipq52xx = "optee-client"
+
 # FastRPC: CDSP remote procedure call daemon + library (ipq96xx only - has CDSP)
 FASTRPC_PKGS = ""
 FASTRPC_PKGS:ipq96xx_64 = "fastrpc"
 FASTRPC_PKGS:ipq96xx = "fastrpc"
 
 # IPQ_BASE_PKGS = "button-hotplug ${SYSUPGRADE} datarmnet"
-IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio memory-dashboard ${RPROC_FW_MOUNT} ${FASTRPC_PKGS}"
+IPQ_BASE_PKGS = "sysstat u-boot-fw-utils  mtd mtd-utils initoverlay wififw-mount qca-qmi-framework qca-diag diag-router qca-thermald ipq-boot procps watchdog-keepalive mcproxy qcawifi-scripts button-hotplug gpio-button-hotplug wolfssl i2c-tools ${SYSUPGRADE} e2fsprogs e2fsprogs-mke2fs e2fsprogs-e2fsck jsonfilter minidump qti-license-pfm qti-softsku-license-loader-libs qca-debug-uio memory-dashboard ${RPROC_FW_MOUNT} ${FASTRPC_PKGS} ${OPTEE_CLIENT_PKGS}"
 IPQ_BASE_PKGS:append:dunfell = " libnghttp2 "
 
 # NETWORK_PKGS = "qca-mcs-app open-iw wireless-tools dhcp-server"
@@ -69,6 +76,8 @@ SSDK_HNAT_PKGS ="qca-ssdk-hnat qca-ssdk-shell"
 SHORTCUT_FE = "shortcut-fe simulated-driver"
 
 QCA_ECM = "qca-nss-ecm"
+
+AFC_PKGS = "qca-afc qca-afc-daemon qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
 
 WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry ath6kl-utils qca-ftm athtestcmd myftm qca-athdiag qca-udtool qca-ath11k-fwtest qca-hapd-supp qca-hapd-supp-macsec qca-cfg80211tool qca-cfg80211 qca-cnssdiag qca-wifi-scripts"
 
