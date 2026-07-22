@@ -11,5 +11,12 @@ RDEPENDS:${PN} = " \
 	wififw-mount \
 	initoverlay \
 	ipq-boot \
+	qca-athdiag \
+	qca-cfg80211 \
+	qca-cfg80211tool \
+	qca-cnssdiag \
+	qca-udtool \
+	common-headers \
+	qca-diag \
 	"
 RDEPENDS:${PN}:append:echo = " qca-wifi-nss-plugins"
