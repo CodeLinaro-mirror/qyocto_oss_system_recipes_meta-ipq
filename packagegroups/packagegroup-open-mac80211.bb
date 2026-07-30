@@ -18,5 +18,8 @@ RDEPENDS:${PN} = " \
 	qca-udtool \
 	common-headers \
 	qca-diag \
+	qca-ftm \
+	myftm \
+	qcawifi-scripts \
 	"
 RDEPENDS:${PN}:append:echo = " qca-wifi-nss-plugins"
