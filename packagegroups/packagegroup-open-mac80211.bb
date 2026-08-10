@@ -11,6 +11,7 @@ RDEPENDS:${PN} = " \
 	wififw-mount \
 	initoverlay \
 	ipq-boot \
+	qca-ath11k-fwtest \
 	qca-athdiag \
 	qca-cfg80211 \
 	qca-cfg80211tool \
