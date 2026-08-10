@@ -23,5 +23,6 @@ RDEPENDS:${PN} = " \
 	myftm \
 	qcawifi-scripts \
 	wifitelemetry \
+	qca-hapd-supp \
 	"
 RDEPENDS:${PN}:append:echo = " qca-wifi-nss-plugins"
