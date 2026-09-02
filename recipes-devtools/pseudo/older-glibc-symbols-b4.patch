@@ -1,0 +1,47 @@
+From 683127321203987ab4de2c0ffb7ef27324b1b3c6 Mon Sep 17 00:00:00 2001
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [PATCH] native: link against prebuilt older glibc symbols
+
+When pseudo is built against glibc 2.34 or later, use the prebuilt older
+glibc libraries for libpseudo so LD_PRELOAD remains compatible with older
+host binaries.
+
+Upstream-Status: Inappropriate [native and nativesdk only]
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ Makefile.in       | 2 +-
+ pseudo_wrappers.c | 5 ++++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 50b41b1..ca5e75c 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -122,6 +122,6 @@ libpseudo: $(LIBPSEUDO)
+ 
+ $(LIBPSEUDO): $(WRAPOBJS) pseudo_client.o pseudo_client_scanf.o pseudo_ipc.o $(SHOBJS) | $(LIB)
+-	$(CC) $(CFLAGS) $(CFLAGS_PSEUDO) -shared -o $(LIBPSEUDO) \
++	$(CC) $(CFLAGS) -Lprebuilt/$(shell uname -m)-linux/lib/ $(CFLAGS_PSEUDO) -shared -o $(LIBPSEUDO) \
+ 		pseudo_client.o pseudo_client_scanf.o pseudo_ipc.o \
+ 		$(WRAPOBJS) $(SHOBJS) $(LDFLAGS) $(CLIENT_LDFLAGS)
+ 
+diff --git a/pseudo_wrappers.c b/pseudo_wrappers.c
+index 11fb3b9..1bb4c8f 100644
+--- a/pseudo_wrappers.c
++++ b/pseudo_wrappers.c
+@@ -102,10 +102,13 @@ static void libpseudo_atfork_child(void)
+ 	pseudo_mutex_holder = 0;
+ }
+ 
++extern void *__dso_handle;
++extern int __register_atfork(void (*)(void), void (*)(void), void (*)(void), void *);
++
+ static void
+ _libpseudo_init(void) {
+ 	if (!_libpseudo_initted)
+-		pthread_atfork(NULL, NULL, libpseudo_atfork_child);
++		__register_atfork(NULL, NULL, libpseudo_atfork_child, &__dso_handle == NULL ? NULL : __dso_handle);
+ 
+ 	pseudo_getlock();
+ 	pseudo_antimagic();
