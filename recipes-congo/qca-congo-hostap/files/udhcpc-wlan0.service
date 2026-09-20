@@ -1,0 +1,17 @@
+[Unit]
+Description=DHCP client for wlan0
+DefaultDependencies=no
+After=wpa-supplicant-fig.service
+PartOf=wpa-supplicant-fig.service
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sh -c 'until wpa_cli_fig -i wlan0 status 2>/dev/null | grep -q "wpa_state=COMPLETED"; do sleep 0.2; done'
+ExecStart=/sbin/udhcpc -i wlan0 -f -R -p /var/run/udhcpc.wlan0.pid
+ExecStartPost=/bin/sh -c 'wpa_cli_fig -B -i wlan0 -a /etc/wpa_cli_fig.action'
+ExecStopPost=/bin/sh -c 'kill $(pgrep -f "wpa_cli_fig.*wpa_cli_fig.action") 2>/dev/null; rm -f /var/run/udhcpc.wlan0.pid /tmp/wpa_disconnected_wlan0'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

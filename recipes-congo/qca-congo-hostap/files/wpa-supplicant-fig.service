@@ -1,0 +1,15 @@
+[Unit]
+Description=WPA Supplicant (wpa_supplicant_fig) for wlan0
+DefaultDependencies=no
+Wants=udhcpc-wlan0.service
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sh -c 'until ip link show wlan0 >/dev/null 2>&1; do sleep 0.1; done'
+ExecStart=/usr/sbin/wpa_supplicant_fig -i wlan0 -Dnl80211 -c /etc/wpa_supplicant_fig.conf
+ExecStartPost=/usr/sbin/wpa-supplicant-fig-post.sh
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
