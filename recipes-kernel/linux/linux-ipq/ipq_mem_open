@@ -1,5 +1,6 @@
 CONFIG_ATH_USER_REGD=y
 CONFIG_PACKAGE_ATH_DEBUG=y
+CONFIG_PACKAGE_kmod-qca-debug-uio=y
 CONFIG_PACKAGE_ATH_DFS=y
 # CONFIG_PACKAGE_kmod-ath3k is not set
 CONFIG_PACKAGE_qti-wifi-location-open=m
