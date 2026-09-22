@@ -13,6 +13,19 @@
 # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+reload_config_after_overlay() {
+	until [ -n "$(systemctl show -p ExecMainExitTimestamp \
+			--value initoverlay.service 2>/dev/null)" ]; do
+		sleep 0.5
+	done
+	until [ -S /var/run/wpa_supplicant/wlan0 ]; do
+		sleep 0.2
+	done
+	wpa_cli_fig -i wlan0 reconfigure >/dev/null 2>&1
+	wpa_cli_fig -i wlan0 scan >/dev/null 2>&1
+}
+reload_config_after_overlay &
+
 while true; do
     until ! ip link show wlan0 >/dev/null 2>&1; do sleep 0.5; done
     until ip link show wlan0 >/dev/null 2>&1; do sleep 0.2; done
