@@ -7,19 +7,19 @@ IMAGE_FEATURES += "package-management"
 
 QYOCTO_PKGS = " libnl dropbear bridge-utils lua5.1 "
 SYSUPGRADE:ipq95xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE:ipq95xx = "u-boot-2025-env sysupgrade "
+SYSUPGRADE:ipq95xx = "sysupgrade "
 
 SYSUPGRADE:ipq53xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE:ipq53xx = "u-boot-2025-env sysupgrade "
+SYSUPGRADE:ipq53xx = "sysupgrade "
 
 SYSUPGRADE:ipq54xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE:ipq54xx = "u-boot-2025-env sysupgrade "
+SYSUPGRADE:ipq54xx = "sysupgrade "
 
 SYSUPGRADE:ipq52xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE:ipq52xx = "u-boot-2025-env sysupgrade "
+SYSUPGRADE:ipq52xx = "sysupgrade "
 
 SYSUPGRADE:ipq96xx_64 = "sysupgrade-helper sysupgrade"
-SYSUPGRADE:ipq96xx = "u-boot-2025-env sysupgrade "
+SYSUPGRADE:ipq96xx = "sysupgrade "
 
 FONTANA_PKG = "omci  omciibc  swacl-if  sw-hook  trex-drv gpon-server"
 FONTANA_PKG:ipq52xx = "gpon-server nss-pon-drv omci-pon"
@@ -93,7 +93,7 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-daemon qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
 
-WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry ath6kl-utils qca-ftm athtestcmd myftm qca-athdiag qca-udtool qca-ath11k-fwtest qca-hapd-supp qca-hapd-supp-macsec qca-cfg80211tool qca-cfg80211 qca-cnssdiag qca-wifi-scripts qca-cfr-tools"
+WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry ath6kl-utils qca-ftm athtestcmd myftm qca-athdiag qca-udtool qca-ath11k-fwtest qca-hapd-supp qca-hapd-supp-macsec qca-cfg80211tool qca-cfg80211 qca-cnssdiag qca-wifi-scripts qca-cfr-tools qca-acfg"
 
 #MCS_PKGS = "qca-mcs-lkm"
 MCS_PKGS = ""
