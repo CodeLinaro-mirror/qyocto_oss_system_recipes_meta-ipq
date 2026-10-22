@@ -25,5 +25,6 @@ RDEPENDS:${PN} = " \
 	wifitelemetry \
 	qca-hapd-supp \
 	qca-sigma-dut \
+        qca-control-app-open \
 	"
 RDEPENDS:${PN}:append:echo = " qca-wifi-nss-plugins tlpd-wifi-agent"
