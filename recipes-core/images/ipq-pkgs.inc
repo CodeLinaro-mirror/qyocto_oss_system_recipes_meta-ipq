@@ -93,7 +93,7 @@ QCA_ECM = "qca-nss-ecm"
 
 AFC_PKGS = "qca-afc qca-afc-daemon qca-afc-files qti-pairing qti-provisioning qti-mfg-provision qti-encrypt"
 
-WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry ath6kl-utils qca-ftm athtestcmd myftm qca-athdiag qca-udtool qca-ath11k-fwtest qca-hapd-supp qca-hapd-supp-macsec qca-cfg80211tool qca-cfg80211 qca-cnssdiag qca-wifi-scripts qca-cfr-tools"
+WIFI_PKGS = "open-mac80211 qca-wifi-nss-plugins telemetry-agent wifitelemetry ath6kl-utils qca-ftm athtestcmd myftm qca-athdiag qca-udtool qca-ath11k-fwtest qca-hapd-supp qca-hapd-supp-macsec qca-cfg80211tool qca-cfg80211 qca-cnssdiag qca-wifi-scripts qca-cfr-tools qca-acfg"
 
 #MCS_PKGS = "qca-mcs-lkm"
 MCS_PKGS = ""
